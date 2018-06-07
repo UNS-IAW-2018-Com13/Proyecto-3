@@ -51,11 +51,29 @@
         <div class="tab-content" id="TabsContent">
             <div class="tab-pane fade show active" id="CrearJugador" role="tabpanel" aria-labelledby="CrearJugador_Tab">
                 <div class="container">
-                    nombre
-                    img
-                    mazo1
-                    mazo2
-                    mazo3
+                    <form action="/action_page.php">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Nombre</label>
+                            <input type="text" class="form-control" id="InNombre" placeholder="Example input">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Imagen</label>
+                            <input type="text" class="form-control" id="InImg" placeholder="Example input">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Mazo 1</label>
+                            <textarea class="form-control" id="InDeck1" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Mazo 2</label>
+                            <textarea class="form-control" id="InDeck2" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Mazo 3</label>
+                            <textarea class="form-control" id="InDeck3" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                    </form>
                 </div>
             </div>
             <div class="tab-pane fade" id="CrearGrupo" role="tabpanel" aria-labelledby="CrearGrupo_Tab">
@@ -65,7 +83,8 @@
             </div>
             <div class="tab-pane fade" id="CrearPartido" role="tabpanel" aria-labelledby="CrearPartido_Tab">
                 <div class="container">
-                    generar partidos -> automatico
+                    <button type="submit" class="btn btn-primary">Generar partidos</button>
+                    
                     asignar editores a partidos -> manual
 
                 </div>
