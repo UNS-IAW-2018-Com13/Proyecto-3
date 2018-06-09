@@ -22,3 +22,6 @@ Route::get('/administrador', function () {
 Route::get('/editor', function () {
     return view('editor');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
