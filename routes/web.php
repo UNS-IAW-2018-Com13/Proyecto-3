@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-	return view('login');
-});
-
 Route::get('/administrador', function () {
     return view('administrador');
 });
@@ -22,6 +18,11 @@ Route::get('/administrador', function () {
 Route::get('/editor', function () {
     return view('editor');
 });
+
+Route::get('/home', function () {
+    return view('home');
+});
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
