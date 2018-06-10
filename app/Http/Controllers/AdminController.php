@@ -7,7 +7,7 @@ use App\Mazo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class JugadorController extends Controller {
+class AdminController extends Controller {
 
     /**
      * Show the profile for the given user.
@@ -15,11 +15,7 @@ class JugadorController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function salvar() {
-        
-    }
-
-    public function show(Request $parametros) {
+    public function crearJugador(Request $parametros) {
         $jugador = Jugador::where('nombre', '=', $parametros->InNombre)->get();
         if (sizeof($jugador) == 0) {
             $jugador = new Jugador();
@@ -44,10 +40,19 @@ class JugadorController extends Controller {
             $jugador->msg = "existe";
         }
 
-
         //$jugador->save();
 
         return view('res', ['jugador' => $jugador]);
+    }
+
+    public function generarGrupos() {
+        $jugadores = Jugador::all();
+        if (sizeof($jugadores) < 16) {
+            $jugadores = json_decode("{}");
+            $jugadores->msg = "no hay suficientes jugadores";
+            return $jugadores;
+        }
+        return $jugadores;
     }
 
 }
