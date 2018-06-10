@@ -50,9 +50,22 @@
         </div>
     </div>
     <div class="tab-pane fade" id="CrearGrupo" role="tabpanel" aria-labelledby="CrearGrupo_Tab">
-        <div class="container">
-            ver database jugadores -> asignar a grupo -> 4 grupos prefabricados
-        </div>
+        <div class="container-fluid" id="divGrupos">
+            <button onclick="generarGrupos('divGrupos');">Generar Grupos</button>
+            
+            <table class="table table-striped" >
+                    <thead>
+                        <tr>
+                            <th>GRUPO A</th>
+                            <th>GRUPO B</th>
+                            <th>GRUPO C</th>
+                            <th>GRUPO D</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaGrupos">
+                        
+                    </tbody>
+                </table>
     </div>
     <div class="tab-pane fade" id="CrearPartido" role="tabpanel" aria-labelledby="CrearPartido_Tab">
         <div class="container">
