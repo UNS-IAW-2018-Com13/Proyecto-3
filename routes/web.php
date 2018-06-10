@@ -27,8 +27,6 @@ Route::get('/', function () {
     }
 })->middleware('auth');
 
-Route::get('/addJugador',  function () {
-    return view('res');
-});
+Route::get('/addJugador', 'JugadorController@show');
 
 Auth::routes();
