@@ -110,10 +110,10 @@ class AdminController extends Controller {
 
 
 
-                        $lista[] = $partido;
+                        $lista[] = $partido->id;
                     }
                 }
-                $res[] = array($grupos[$i]->nombre, $lista);
+                $res[] = array("Grupo ".$grupos[$i]->nombre, $lista);
             }
             return $res;
         }
