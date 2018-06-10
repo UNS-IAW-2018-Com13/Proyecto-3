@@ -51,15 +51,12 @@
     </div>
     <div class="tab-pane fade" id="CrearGrupo" role="tabpanel" aria-labelledby="CrearGrupo_Tab">
         <div class="container-fluid" id="divGrupos">
-            <button onclick="generarGrupos('divGrupos');">Generar Grupos</button>
+            <button class="btn btn-primary" onclick="generarGrupos('divGrupos');">Generar Grupos</button>
         </div>
     </div>
     <div class="tab-pane fade" id="CrearPartido" role="tabpanel" aria-labelledby="CrearPartido_Tab">
-        <div class="container">
-            <button type="submit" class="btn btn-primary">Generar partidos</button>
-
-            asignar editores a partidos -> manual
-
+        <div class="container-fluid" id="divPartidos">
+            <button class="btn btn-primary" onclick="generarPartidos('divPartidos');">Generar Partidos</button>
         </div>
     </div>
 </div>

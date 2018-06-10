@@ -20,7 +20,7 @@ Route::get('/editor', function () {
 });
 
 Route::get('/', function () {
-    if( Auth::user()->name==="admin"){
+    if( Auth::user()->name === "admin"){
         return view('administrador');
     }else{
         return view('editor');
@@ -30,5 +30,9 @@ Route::get('/', function () {
 Route::post('/addJugador','AdminController@crearJugador')->middleware('auth');
 
 Route::get('/generarGrupos','AdminController@generarGrupos')->middleware('auth');
+
+Route::get('/generarPartidos','AdminController@generarPartidos')->middleware('auth');
+
+Route::post('/asignarEditores','AdminController@asignarEditores')->middleware('auth');
 
 Auth::routes();
