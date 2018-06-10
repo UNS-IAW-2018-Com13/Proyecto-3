@@ -19,16 +19,16 @@ Route::get('/editor', function () {
     return view('editor');
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/', function () {
+    if( Auth::user()->name==="admin"){
+        return view('administrador');
+    }else{
+        return view('editor');
+    }
+})->middleware('auth');
 
 Route::get('/addJugador',  function () {
-    return view('res');});
+    return view('res');
+});
 
-    
 Auth::routes();
-Route::get('/', 'HomeController@index')->name('home');
-
-
-
