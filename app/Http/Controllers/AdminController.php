@@ -86,7 +86,7 @@ class AdminController extends Controller {
 
     public function generarPartidos() {
         $partidos = Partidos::all();
-        if (sizeof($partidos) > 0) {
+        if (sizeof($partidos) === 0) {
             $partidos = Array("msg" => "Partidos ya creados");
             return $partidos;
         } else {

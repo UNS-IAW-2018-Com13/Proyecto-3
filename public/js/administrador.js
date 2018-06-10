@@ -4,7 +4,7 @@ function generarGrupos(idDiv) {
 
     $.get('/generarGrupos', function (res, req) {
         if (res.hasOwnProperty("msg")) {
-            var mensaje = document.createTextNode(res.msj);
+            var mensaje = document.createTextNode(res.msg);
             divGrupos.removeChild(boton);
             divGrupos.appendChild(mensaje);
             divGrupos.appendChild(boton);
@@ -65,7 +65,7 @@ function generarPartidos(idDiv) {
 
     $.get('/generarPartidos', function (res, req) {
         if (res.hasOwnProperty("msg")) {
-            var mensaje = document.createTextNode(res.msj);
+            var mensaje = document.createTextNode(res.msg);
             divPartidos.removeChild(boton);
             divPartidos.appendChild(mensaje);
             divPartidos.appendChild(boton);
@@ -108,7 +108,7 @@ function generarPartidos(idDiv) {
             var cuerpoTabla = document.createElement("tbody");
             
             for(var i = 0; i < res.length; i++){
-                var filaBody = document.createElement("tr");
+                var filaBody = document.createElement("th");
                 filaBody.setAttribute("rowspan", "5");
                 var subtitulo = document.createTextNode(res[i].grupo);
                 filaBody.appendChild(subtitulo);
