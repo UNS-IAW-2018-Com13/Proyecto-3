@@ -46,13 +46,36 @@ class AdminController extends Controller {
     }
 
     public function generarGrupos() {
-        $jugadores = Jugador::all();
-        if (sizeof($jugadores) < 16) {
-            $jugadores = json_decode("{}");
-            $jugadores->msg = "no hay suficientes jugadores";
-            return $jugadores;
+        $grupos = Grupos::all();
+
+        if (sizeof($grupos) > 0) {
+            $grupos = json_decode("{}");
+            $grupos->msg = "Grupos ya creados";
+            return $grupos;
+        } else {
+            $jugadores = Jugador::all();
+            if (sizeof($jugadores) < 16) {
+                $jugadores = json_decode("{}");
+                $jugadores->msg = "no hay suficientes jugadores";
+                return $jugadores;
+            } else {
+                $grupos = array(new Grupos(), new Grupos(), new Grupos(), new Grupos());
+
+                $grupos[0]->nombre = "A";
+                $grupos[0]->integrantes = array();
+                $grupos[1]->nombre = "B";
+                $grupos[1]->integrantes = array();
+                $grupos[2]->nombre = "C";
+                $grupos[2]->integrantes = array();
+                $grupos[3]->nombre = "D";
+                $grupos[3]->integrantes = array();
+
+                for ($i = 0; $i < Jugador::all(); $i++) {
+                    array_push($grupos[$i % 4]->integrantes, Jugador::all()[0]->nombre);
+                }
+                return $grupos;
+            }
         }
-        return $jugadores;
     }
 
 }
