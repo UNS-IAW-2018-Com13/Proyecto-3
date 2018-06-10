@@ -22,6 +22,7 @@
 </div>
 <div class="tab-content" id="TabsContent">
     <div class="tab-pane fade show active" id="CrearJugador" role="tabpanel" aria-labelledby="CrearJugador_Tab">
+        <br/>
         <div class="container">
             <form action="{{action('AdminController@crearJugador')}}" method="post">                
                 @csrf
@@ -50,11 +51,13 @@
         </div>
     </div>
     <div class="tab-pane fade" id="CrearGrupo" role="tabpanel" aria-labelledby="CrearGrupo_Tab">
+        <br/>
         <div class="container-fluid" id="divGrupos">
             <button class="btn btn-primary" onclick="generarGrupos('divGrupos');">Generar Grupos</button>
         </div>
     </div>
     <div class="tab-pane fade" id="CrearPartido" role="tabpanel" aria-labelledby="CrearPartido_Tab">
+        <br/>
         <div class="container-fluid" id="divPartidos">
             <button class="btn btn-primary" onclick="generarPartidos('divPartidos');">Generar Partidos</button>
         </div>
