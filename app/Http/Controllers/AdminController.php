@@ -106,14 +106,14 @@ class AdminController extends Controller {
                         $partido->mazosJugador2 = array();
                         $partido->ganador = array();
                         $partido->editor = "";
-                        $partido->id = $integ[$c1] . "/" . $integ[$c2];
+                        $partido->id = $integ[$c1] . chr(47) . $integ[$c2];
 
 
 
-                        $lista[] = $partido;
+                        $lista[] = $partido->id;
                     }
                 }
-                $res[] = array($grupos[$i]->nombre, $lista);
+                $res[] = array('grupo' => "Grupo ".$grupos[$i]->nombre, 'partidos' => $lista);
             }
             return $res;
         }
