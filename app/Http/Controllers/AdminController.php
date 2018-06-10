@@ -49,7 +49,7 @@ class AdminController extends Controller {
     public function generarGrupos() {
         $grupos = Grupos::all();
 
-        if (sizeof($grupos) === 0) {
+        if (sizeof($grupos) > 0) {
             $grupos->msg = "Grupos ya creados";
             return $grupos;
         } else {
