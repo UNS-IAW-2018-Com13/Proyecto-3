@@ -23,14 +23,15 @@
 <div class="tab-content" id="TabsContent">
     <div class="tab-pane fade show active" id="CrearJugador" role="tabpanel" aria-labelledby="CrearJugador_Tab">
         <div class="container">
-            <form action="addJugador" method="get">
+            <form action="{{action('JugadorController@show')}}" method="post">                
+                @csrf
                 <div class="form-group">
                     <label for="formGroupExampleInput">Nombre</label>
-                    <input type="text" class="form-control" name="InNombre" placeholder="Example input">
+                    <input type="text" class="form-control" name="InNombre">
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput">Imagen</label>
-                    <input type="text" class="form-control" name="InImg" placeholder="Example input">
+                    <input type="text" class="form-control" name="InImg">
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Mazo 1</label>

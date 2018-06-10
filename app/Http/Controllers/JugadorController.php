@@ -6,6 +6,9 @@ use App\Jugador;
 use App\Mazo;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Http\Request;
+
+
 class JugadorController extends Controller
 {
     /**
@@ -14,8 +17,17 @@ class JugadorController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    
+    public function salvar(){
+        
+    }
+
+
+    public function show(Request $parametros)
     {
-        return view('user.profile', ['user' => User::findOrFail($id)]);
+        $jugador= new Jugador();
+        $jugador->nombre = $parametros->InNombre;
+        
+        return view('res');
     }
 }
