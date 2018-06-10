@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jugador;
 use App\Mazo;
 use App\Grupos;
+use App\Partidos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -48,14 +49,13 @@ class AdminController extends Controller {
 
     public function generarGrupos() {
         $grupos = Grupos::all();
-
-        if (sizeof($grupos) === 0) {
-            $grupos->msg = "Grupos ya creados";
+        if (sizeof($grupos) > 0) {
+            $grupos = Array("msg" => "Grupos ya creados");
             return $grupos;
         } else {
             $jugadores = Jugador::all();
             if (sizeof($jugadores) < 16) {
-                $jugadores->msg = "no hay suficientes jugadores";
+                $jugadores = Array("msg" => "no hay suficientes jugadores");
                 return $jugadores;
             } else {
                 $grupos = array(new Grupos(), new Grupos(), new Grupos(), new Grupos());
@@ -69,12 +69,56 @@ class AdminController extends Controller {
                 $grupos[3]->nombre = "D";
                 $grupos[3]->integrantes = array();
 
+                $aux;
                 for ($i = 0; $i < sizeof($jugadores); $i++) {
-                    array_push($grupos[$i % 4]->integrantes, $jugadores[$i]->nombre);
+                    $aux = $grupos[$i % 4]->integrantes;
+                    $aux[] = $jugadores[$i]->nombre;
+                    $grupos[$i % 4]->integrantes = $aux;
+                }
+
+                for ($i = 0; $i < sizeof($grupos); $i++) {
+                    //$grupos[$i]->save();
                 }
                 return $grupos;
             }
         }
+    }
+
+    public function generarPartidos() {
+        $partidos = Partidos::all();
+        if (sizeof($partidos) > 0) {
+            $partidos = Array("msg" => "Partidos ya creados");
+            return $partidos;
+        } else {
+            $grupos = Grupos::all();
+            $res= array();
+            for ($i = 0; $i < sizeof($grupos); $i++) {
+                $lista= array();
+                $integ = $grupos[$i]->integrantes;
+                for ($c1 = 0; $c1 < sizeof($integ); $c1++) {
+                    for ($c2 = $c1+1; $c2 < sizeof($integ); $c2++) {
+                        $partido= new Partidos();
+                        $partido->fecha="";
+                        $partido->hora="";                        
+                        $partido->jugador1=$integ[$c1];
+                        $partido->mazosJugador1= array();                        
+                        $partido->jugador2=$integ[$c2];
+                        $partido->mazosJugador2= array();
+                        $partido->ganador= array();
+                        $partido->id= $integ[$c1]."/".$integ[$c2];
+                        
+                        
+                        $lista[]= $partido;
+                    }
+                }
+                $res[]= array($grupos[$i]->nombre, $lista);
+            }
+            return $res;
+        }
+    }
+
+    public function asignarEditores() {
+        
     }
 
 }
