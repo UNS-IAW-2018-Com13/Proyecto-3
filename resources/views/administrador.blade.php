@@ -23,7 +23,7 @@
 <div class="tab-content" id="TabsContent">
     <div class="tab-pane fade show active" id="CrearJugador" role="tabpanel" aria-labelledby="CrearJugador_Tab">
         <div class="container">
-            <form action="{{action('JugadorController@show')}}" method="post">                
+            <form action="{{action('AdminController@crearJugador')}}" method="post">                
                 @csrf
                 <div class="form-group">
                     <label for="formGroupExampleInput">Nombre</label>
