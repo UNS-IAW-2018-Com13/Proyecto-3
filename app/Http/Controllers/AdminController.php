@@ -91,34 +91,44 @@ class AdminController extends Controller {
             return $partidos;
         } else {
             $grupos = Grupos::all();
-            $res= array();
+            $res = array();
             for ($i = 0; $i < sizeof($grupos); $i++) {
-                $lista= array();
+                $lista = array();
                 $integ = $grupos[$i]->integrantes;
                 for ($c1 = 0; $c1 < sizeof($integ); $c1++) {
-                    for ($c2 = $c1+1; $c2 < sizeof($integ); $c2++) {
-                        $partido= new Partidos();
-                        $partido->fecha="";
-                        $partido->hora="";                        
-                        $partido->jugador1=$integ[$c1];
-                        $partido->mazosJugador1= array();                        
-                        $partido->jugador2=$integ[$c2];
-                        $partido->mazosJugador2= array();
-                        $partido->ganador= array();
-                        $partido->id= $integ[$c1]."/".$integ[$c2];
-                        
-                        
-                        $lista[]= $partido;
+                    for ($c2 = $c1 + 1; $c2 < sizeof($integ); $c2++) {
+                        $partido = new Partidos();
+                        $partido->fecha = "";
+                        $partido->hora = "";
+                        $partido->jugador1 = $integ[$c1];
+                        $partido->mazosJugador1 = array();
+                        $partido->jugador2 = $integ[$c2];
+                        $partido->mazosJugador2 = array();
+                        $partido->ganador = array();
+                        $partido->editor = "";
+                        $partido->id = $integ[$c1] . "/" . $integ[$c2];
+
+
+
+                        $lista[] = $partido;
                     }
                 }
-                $res[]= array($grupos[$i]->nombre, $lista);
+                $res[] = array($grupos[$i]->nombre, $lista);
             }
             return $res;
         }
     }
 
-    public function asignarEditores() {
-        
+    public function asignarEditores(Request $parametros) {
+        $partido = Partidos::where('id', '=', $parametros->id)->get();
+        if (sizeof($partido) > 0) {
+            $partido[0]->fecha = $parametros->fecha;
+            $partido[0]->hora = $parametros->hora;
+            $partido[0]->editor = $parametros->editor;
+            //$partido[0]->save();
+            return (array('msg'=> "ok"));
+        };
+        return (array('msg'=> "fail"));
     }
 
 }
