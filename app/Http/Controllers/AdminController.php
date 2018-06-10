@@ -71,7 +71,7 @@ class AdminController extends Controller {
                 $grupos[3]->integrantes = array();
 
                 for ($i = 0; $i < Jugador::all(); $i++) {
-                    array_push($grupos[$i % 4]->integrantes, Jugador::all()[0]->nombre);
+                    array_push($grupos[$i % 4]->integrantes, Jugador::all()[$i]->nombre);
                 }
                 return $grupos;
             }
