@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jugador;
 use App\Mazo;
+use App\Grupos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -48,14 +49,12 @@ class AdminController extends Controller {
     public function generarGrupos() {
         $grupos = Grupos::all();
 
-        if (sizeof($grupos) > 0) {
-            $grupos = json_decode("{}");
+        if (sizeof($grupos) === 0) {
             $grupos->msg = "Grupos ya creados";
             return $grupos;
         } else {
             $jugadores = Jugador::all();
             if (sizeof($jugadores) < 16) {
-                $jugadores = json_decode("{}");
                 $jugadores->msg = "no hay suficientes jugadores";
                 return $jugadores;
             } else {
@@ -70,8 +69,8 @@ class AdminController extends Controller {
                 $grupos[3]->nombre = "D";
                 $grupos[3]->integrantes = array();
 
-                for ($i = 0; $i < Jugador::all(); $i++) {
-                    array_push($grupos[$i % 4]->integrantes, Jugador::all()[$i]->nombre);
+                for ($i = 0; $i < sizeof($jugadores); $i++) {
+                    array_push($grupos[$i % 4]->integrantes, $jugadores[$i]->nombre);
                 }
                 return $grupos;
             }

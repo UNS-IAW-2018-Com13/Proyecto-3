@@ -1,5 +1,5 @@
 function generarGrupos(idDiv) {
-    var divGrupos = document.getElementById("idDiv");
+    var divGrupos = document.getElementById(idDiv);
     var boton = divGrupos.lastChild;
 
     $.get('/generarGrupos', function (res, req) {
@@ -42,9 +42,9 @@ function generarGrupos(idDiv) {
             
             var cuerpoTabla = document.createElement("tbody");
             
-            for(var i = 0; i < 3; i++){
+            for(var i = 0; i < 4; i++){
                 var filaBody = document.createElement("tr");
-                for(var j = 0; i < 3; i++){
+                for(var j = 0; j < 4; j++){
                     var celdaBody = document.createElement("td");
                     var integrante = document.createTextNode(res[j].integrantes[i]);
                     celdaBody.appendChild(integrante);
