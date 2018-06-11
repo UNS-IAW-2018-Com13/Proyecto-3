@@ -14,38 +14,7 @@
                     <th>EDITAR</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ($partidos as $partido)
-                    <tr>
-                        <td>
-                            {{ $partido->enf1 }}
-                        </td>
-                        <td>
-                            {{ $partido->enf2 }}
-                        </td>
-                        <td>
-                            {{ $partido->enf3 }}
-                        </td>
-                        <td>
-                            {{ $partido->enf4 }}
-                        </td>
-                        <td>
-                            {{ $partido->enf5 }}
-                        </td>
-                        <td>
-                            {{ $partido.jugador1 }}
-                        </td>
-                        <td>
-                            {{ $partido.resultado1 }}
-                        </td>
-                        <td>
-                            {{ $partido.jugador2 }}
-                        </td>
-                        <td>
-                            {{ $partido.resultado2 }}
-                        </td>
-                    </tr>
-                @endforeach
+            
             </tbody>
         </table>
     </div>
