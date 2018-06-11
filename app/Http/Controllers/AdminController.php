@@ -108,12 +108,12 @@ class AdminController extends Controller {
                         $partido->editor = "";
                         $partido->id = $integ[$c1] . chr(47) . $integ[$c2];
 
+                        //$partido->save();
 
-
-                        $lista[] = $partido->id;
+                        $lista[] = $partido;
                     }
                 }
-                $res[] = array('grupo' => "Grupo ".$grupos[$i]->nombre, 'partidos' => $lista);
+                $res[] = array('grupo' => "Grupo " . $grupos[$i]->nombre, 'partidos' => $lista);
             }
             return $res;
         }
@@ -126,9 +126,9 @@ class AdminController extends Controller {
             $partido[0]->hora = $parametros->hora;
             $partido[0]->editor = $parametros->editor;
             //$partido[0]->save();
-            return (array('msg'=> "ok"));
+            return (array('msg' => "ok"));
         };
-        return (array('msg'=> "fail"));
+        return (array('msg' => "fail"));
     }
 
 }
