@@ -37,7 +37,7 @@ class AdminController extends Controller {
               $mazo = substr($mazo, 0, -1) . "]}";
               echo $mazo . "<br/>";
              */
-            $jugador->save();
+            //$jugador->save();
         } else {
             $jugador = json_decode("{}");
             $jugador->msg = "existe";
