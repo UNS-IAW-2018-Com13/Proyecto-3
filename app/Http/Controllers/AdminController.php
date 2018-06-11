@@ -37,12 +37,11 @@ class AdminController extends Controller {
               $mazo = substr($mazo, 0, -1) . "]}";
               echo $mazo . "<br/>";
              */
+            $jugador->save();
         } else {
             $jugador = json_decode("{}");
             $jugador->msg = "existe";
-        }
-
-        //$jugador->save();
+        }      
 
         return view('res', ['jugador' => $jugador]);
     }
@@ -77,7 +76,7 @@ class AdminController extends Controller {
                 }
 
                 for ($i = 0; $i < sizeof($grupos); $i++) {
-                    //$grupos[$i]->save();
+                    $grupos[$i]->save();
                 }
                 return $grupos;
             }
@@ -86,9 +85,10 @@ class AdminController extends Controller {
 
     public function generarPartidos() {
         $partidos = Partidos::all();
-        if (sizeof($partidos) === 0) {
-            $partidos = Array("msg" => "Partidos ya creados");
-            return $partidos;
+        if (sizeof($partidos) > 0) {
+            $res=array();
+            $res[]=array('grupo' => "Todos", 'partidos' => $partidos);
+            return $res;
         } else {
             $grupos = Grupos::all();
             $res = array();
@@ -108,7 +108,7 @@ class AdminController extends Controller {
                         $partido->editor = "";
                         $partido->id = $integ[$c1] . chr(47) . $integ[$c2];
 
-                        //$partido->save();
+                        $partido->save();
 
                         $lista[] = $partido;
                     }
@@ -125,7 +125,7 @@ class AdminController extends Controller {
             $partido[0]->fecha = $parametros->fecha;
             $partido[0]->hora = $parametros->hora;
             $partido[0]->editor = $parametros->editor;
-            //$partido[0]->save();
+            $partido[0]->save();
             return (array('msg' => "ok"));
         };
         return (array('msg' => "fail"));

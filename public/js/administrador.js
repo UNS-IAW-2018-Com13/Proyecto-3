@@ -40,7 +40,6 @@ function generarGrupos(idDiv) {
             tabla.appendChild(headTabla);
 
             var cuerpoTabla = document.createElement("tbody");
-
             for (var i = 0; i < res.length; i++) {
                 var filaBody = document.createElement("tr");
                 for (var j = 0; j < res[i].integrantes.length; j++) {
@@ -196,7 +195,6 @@ function actualizarTablaPartidos(id) {
                 var hora = document.getElementById("hora" + id);
                 var editor = document.getElementById("editor" + id);
                 var status = document.getElementById("status" + id);
-                
                 
                 fecha.removeChild(fecha.firstChild);
                 fecha.appendChild(document.createTextNode(tfecha));

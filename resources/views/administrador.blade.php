@@ -24,7 +24,8 @@
     <div class="tab-pane fade show active" id="CrearJugador" role="tabpanel" aria-labelledby="CrearJugador_Tab">
         <br/>
         <div class="container">
-            <form>                
+            <form action="{{action('AdminController@crearJugador')}}" method="post">                
+                @csrf              
                 <div class="form-group">
                     <label for="formGroupExampleInput">Nombre</label>
                     <input type="text" class="form-control" name="InNombre">
@@ -72,23 +73,23 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            
+
             <div class="modal-body" id="ventanaCuerpo">                        
                 <div class="container">                    
-                        <div class="form-group">
-                            <label for="formGroupExampleInput">Fecha</label>
-                            <input id="textFecha" type="text" class="form-control" name="textFecha">
-                        </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput">Hora</label>
-                            <input id="textHora" type="text" class="form-control" name="textHora">
-                        </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput">Hora</label>
-                            <input id="textEditor" type="text" class="form-control" name="textEditor">
-                        </div>
-                        <button id="botonModal" type="submit" class="btn btn-primary">Aceptar</button>
-                   </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Fecha</label>
+                        <input id="textFecha" type="text" class="form-control" name="textFecha">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Hora</label>
+                        <input id="textHora" type="text" class="form-control" name="textHora">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Hora</label>
+                        <input id="textEditor" type="text" class="form-control" name="textEditor">
+                    </div>
+                    <button id="botonModal" type="submit" class="btn btn-primary">Aceptar</button>
+                </div>
             </div>
         </div>
     </div>

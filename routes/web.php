@@ -35,4 +35,6 @@ Route::get('/generarPartidos','AdminController@generarPartidos')->middleware('au
 
 Route::post('/asignarEditores','AdminController@asignarEditores')->middleware('auth');
 
+
+
 Auth::routes();
