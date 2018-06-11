@@ -14,7 +14,37 @@
                     <th>EDITAR</th>
                 </tr>
             </thead>
-            
+            <!--
+            <tbody>
+                @foreach ($partidos as $partido)
+                    <tr>
+                        <td>
+                            {{ $partido->enf1 }}
+                        </td>
+                        <td>
+                            {{ $partido->enf2 }}
+                        </td>
+                        <td>
+                            {{ $partido->enf3 }}
+                        </td>
+                        <td>
+                            {{ $partido->enf4 }}
+                        </td>
+                        <td>
+                            {{ $partido->enf5 }}
+                        </td>
+                        <td>
+                            {{ $partido->comentario }}
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" onclick="generarPartidos('divPartidos');">Editar</button>
+                        </td>
+                        <td>
+                            {{ $partido->msg }}
+                        </td>
+                    </tr>
+                @endforeach
+                -->
             </tbody>
         </table>
     </div>
