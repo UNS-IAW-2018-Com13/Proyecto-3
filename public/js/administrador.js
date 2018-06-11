@@ -121,12 +121,12 @@ function generarPartidos(idDiv) {
                 for (var j = 0; j < res[i].partidos.length; j++) {
                     filaBody = document.createElement("tr");
                     var celdaBody = document.createElement("td");
-                    var partido = document.createTextNode(res[i].partidos[j]);
+                    var partido = document.createTextNode(res[i].partidos[j].id);
                     celdaBody.appendChild(partido);
                     filaBody.appendChild(celdaBody);
 
                     var celdaBody = document.createElement("td");
-                    celdaBody.setAttribute("id", "fecha" + res[i].partidos[j]);
+                    celdaBody.setAttribute("id", "fecha" + res[i].partidos[j].id);
                     var fecha = document.createTextNode(res[i].partidos[j].fecha);
                     celdaBody.appendChild(fecha);
                     filaBody.appendChild(celdaBody);

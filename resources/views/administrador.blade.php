@@ -74,8 +74,7 @@
             </div>
             <div class="modal-body" id="ventanaCuerpo">                        
                 <div class="container">
-                    <form action="{{action('AdminController@asignarEditores')}}" method="post">                
-                        @csrf
+                    <form>                
                         <div class="form-group">
                             <label for="formGroupExampleInput">Fecha</label>
                             <input id="textFecha" type="text" class="form-control" name="textFecha">
