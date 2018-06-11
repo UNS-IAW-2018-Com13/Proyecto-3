@@ -25,7 +25,6 @@
         <br/>
         <div class="container">
             <form>                
-                @csrf
                 <div class="form-group">
                     <label for="formGroupExampleInput">Nombre</label>
                     <input type="text" class="form-control" name="InNombre">

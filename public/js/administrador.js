@@ -180,18 +180,18 @@ function completarModal(id) {
 }
 
 function actualizarTablaPartidos(id) {
-    $.post('/asignarEditores', function (res, req) {
+    var fecha = document.getElementById("fecha" + id);
+    var hora = document.getElementById("hora" + id);
+    var editor = document.getElementById("editor" + id);
+    var status = document.getElementById("editor" + id);
+
+    var tfecha = document.getElementById("textFecha").value;
+    var thora = document.getElementById("textHora").value;
+    var teditor = document.getElementById("textEditor").value;
+    
+    $.post('/asignarEditores', {"id":id, "fecha":tfecha, "hora":thora, "editor": teditor}, function (res, req) {
         if (res.hasOwnProperty("msg")) {
             if (res.msg === "ok") {
-                var fecha = document.getElementById("fecha" + id);
-                var hora = document.getElementById("hora" + id);
-                var editor = document.getElementById("editor" + id);
-                var status = document.getElementById("editor" + id);
-
-                var tfecha = document.getElementById("textFecha").value;
-                var thora = document.getElementById("textHora").value;
-                var teditor = document.getElementById("textEditor").value;
-
                 fecha.removeChild(fecha.firstChild);
                 fecha.appendChild(document.createTextNode(tfecha));
                 hora.removeChild(hora.firstChild);
