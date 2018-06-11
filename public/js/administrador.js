@@ -197,6 +197,7 @@ function actualizarTablaPartidos(id) {
                 var editor = document.getElementById("editor" + id);
                 var status = document.getElementById("status" + id);
                 
+                
                 fecha.removeChild(fecha.firstChild);
                 fecha.appendChild(document.createTextNode(tfecha));
                 hora.removeChild(hora.firstChild);
