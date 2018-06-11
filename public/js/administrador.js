@@ -121,24 +121,24 @@ function generarPartidos(idDiv) {
                 for (var j = 0; j < res[i].partidos.length; j++) {
                     filaBody = document.createElement("tr");
                     var celdaBody = document.createElement("td");
-                    var partido = document.createTextNode(res[i].partidos[j]);
+                    var partido = document.createTextNode(res[i].partidos[j].id);
                     celdaBody.appendChild(partido);
                     filaBody.appendChild(celdaBody);
 
                     var celdaBody = document.createElement("td");
-                    celdaBody.setAttribute("id", "fecha" + res[i].partidos[j]);
+                    celdaBody.setAttribute("id", "fecha" + res[i].partidos[j].id);
                     var fecha = document.createTextNode(res[i].partidos[j].fecha);
                     celdaBody.appendChild(fecha);
                     filaBody.appendChild(celdaBody);
 
                     var celdaBody = document.createElement("td");
-                    celdaBody.setAttribute("id", "hora" + res[i].partidos[j]);
+                    celdaBody.setAttribute("id", "hora" + res[i].partidos[j].id);
                     var hora = document.createTextNode(res[i].partidos[j].hora);
                     celdaBody.appendChild(hora);
                     filaBody.appendChild(celdaBody);
 
                     var celdaBody = document.createElement("td");
-                    celdaBody.setAttribute("id", "editor" + res[i].partidos[j]);
+                    celdaBody.setAttribute("id", "editor" + res[i].partidos[j].id);
                     var editor = document.createTextNode(res[i].partidos[j].editor);
                     celdaBody.appendChild(editor);
                     filaBody.appendChild(celdaBody);
@@ -148,7 +148,7 @@ function generarPartidos(idDiv) {
                     botonEditar.setAttribute("class", "btn btn-primary");
                     botonEditar.setAttribute("data-toggle", "modal");
                     botonEditar.setAttribute("data-target", "#ventanaPartido");
-                    botonEditar.setAttribute("onclick", "completarModal('" + res[i].partidos[j] + "')");
+                    botonEditar.setAttribute("onclick", "completarModal('" + res[i].partidos[j].id + "')");
                     var textoBoton = document.createTextNode("Editar");
                     botonEditar.appendChild(textoBoton);
                     celdaBody.appendChild(botonEditar);
@@ -156,7 +156,7 @@ function generarPartidos(idDiv) {
 
 
                     var celdaBody = document.createElement("td");
-                    celdaBody.setAttribute("id", "status" + res[i].partidos[j]);
+                    celdaBody.setAttribute("id", "status" + res[i].partidos[j].id);
                     var status = document.createTextNode(" ");
                     celdaBody.appendChild(status);
                     filaBody.appendChild(celdaBody);
@@ -179,19 +179,24 @@ function completarModal(id) {
     boton.setAttribute("onclick", "actualizarTablaPartidos('" + id + "')");
 }
 
-function actualizarTablaPartidos(id) {
-    var fecha = document.getElementById("fecha" + id);
-    var hora = document.getElementById("hora" + id);
-    var editor = document.getElementById("editor" + id);
-    var status = document.getElementById("editor" + id);
-
+function actualizarTablaPartidos(id) {    
     var tfecha = document.getElementById("textFecha").value;
     var thora = document.getElementById("textHora").value;
     var teditor = document.getElementById("textEditor").value;
-    
-    $.post('/asignarEditores', {"id":id, "fecha":tfecha, "hora":thora, "editor": teditor}, function (res, req) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.post('/asignarEditores', {"id": id, "fecha": tfecha, "hora": thora, "editor": teditor}, function (res, req) {
         if (res.hasOwnProperty("msg")) {
             if (res.msg === "ok") {
+                var fecha = document.getElementById("fecha" + id);
+                var hora = document.getElementById("hora" + id);
+                var editor = document.getElementById("editor" + id);
+                var status = document.getElementById("status" + id);
+                
                 fecha.removeChild(fecha.firstChild);
                 fecha.appendChild(document.createTextNode(tfecha));
                 hora.removeChild(hora.firstChild);
@@ -201,12 +206,12 @@ function actualizarTablaPartidos(id) {
                 status.removeChild(status.firstChild);
                 status.appendChild(document.createTextNode(res.msg));
             } else {
-                var status = document.getElementById("editor" + id);
+                var status = document.getElementById("status" + id);
                 status.removeChild(status.firstChild);
-                status.appendChild(document.createTextNode(res.msg));
+                status.appendChild(document.createTextNode("error: " + res.msg));
             }
         } else {
-            var status = document.getElementById("editor" + id);
+            var status = document.getElementById("status" + id);
             status.removeChild(status.firstChild);
             status.appendChild(document.createTextNode("ERROR"));
         }

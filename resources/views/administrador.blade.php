@@ -72,10 +72,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            
             <div class="modal-body" id="ventanaCuerpo">                        
-                <div class="container">
-                    <form action="{{action('AdminController@asignarEditores')}}" method="post">                
-                        @csrf
+                <div class="container">                    
                         <div class="form-group">
                             <label for="formGroupExampleInput">Fecha</label>
                             <input id="textFecha" type="text" class="form-control" name="textFecha">
@@ -89,8 +88,7 @@
                             <input id="textEditor" type="text" class="form-control" name="textEditor">
                         </div>
                         <button id="botonModal" type="submit" class="btn btn-primary">Aceptar</button>
-                    </form>
-                </div>
+                   </div>
             </div>
         </div>
     </div>

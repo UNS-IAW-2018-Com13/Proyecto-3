@@ -110,7 +110,7 @@ class AdminController extends Controller {
 
                         //$partido->save();
 
-                        $lista[] = $partido->id;
+                        $lista[] = $partido;
                     }
                 }
                 $res[] = array('grupo' => "Grupo " . $grupos[$i]->nombre, 'partidos' => $lista);
