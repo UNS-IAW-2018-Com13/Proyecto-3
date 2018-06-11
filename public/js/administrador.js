@@ -10,40 +10,40 @@ function generarGrupos(idDiv) {
             divGrupos.appendChild(boton);
         } else {
             var tabla = document.createElement("table");
-            tabla.setAttribute("class","table table-striped");
-            
+            tabla.setAttribute("class", "table table-striped");
+
             var headTabla = document.createElement("thead");
             var filaHead = document.createElement("tr");
-            
+
             var celdaHead = document.createElement("th");
             var titulo = document.createTextNode("GRUPO " + res[0].nombre);
             celdaHead.appendChild(titulo);
             filaHead.appendChild(celdaHead);
-            
+
             celdaHead = document.createElement("th");
             titulo = document.createTextNode("GRUPO " + res[1].nombre);
             celdaHead.appendChild(titulo);
             filaHead.appendChild(celdaHead);
-            
+
             celdaHead = document.createElement("th");
             titulo = document.createTextNode("GRUPO " + res[2].nombre);
             celdaHead.appendChild(titulo);
             filaHead.appendChild(celdaHead);
-            
+
             celdaHead = document.createElement("th");
             titulo = document.createTextNode("GRUPO " + res[3].nombre);
             celdaHead.appendChild(titulo);
             filaHead.appendChild(celdaHead);
-            
+
             headTabla.appendChild(filaHead);
-            
+
             tabla.appendChild(headTabla);
-            
+
             var cuerpoTabla = document.createElement("tbody");
-            
-            for(var i = 0; i < res.length; i++){
+
+            for (var i = 0; i < res.length; i++) {
                 var filaBody = document.createElement("tr");
-                for(var j = 0; j < res[i].integrantes.length; j++){
+                for (var j = 0; j < res[i].integrantes.length; j++) {
                     var celdaBody = document.createElement("td");
                     var integrante = document.createTextNode(res[j].integrantes[i]);
                     celdaBody.appendChild(integrante);
@@ -51,7 +51,7 @@ function generarGrupos(idDiv) {
                 }
                 cuerpoTabla.appendChild(filaBody);
             }
-            
+
             tabla.appendChild(cuerpoTabla);
             divGrupos.removeChild(boton);
             divGrupos.appendChild(tabla);
@@ -71,73 +71,78 @@ function generarPartidos(idDiv) {
             divPartidos.appendChild(boton);
         } else {
             var tabla = document.createElement("table");
-            tabla.setAttribute("class","table table-striped");
-            
+            tabla.setAttribute("class", "table table-striped");
+
             var headTabla = document.createElement("thead");
             var filaHead = document.createElement("tr");
-            
+
             var celdaHead = document.createElement("th");
             var titulo = document.createTextNode("ID");
             celdaHead.appendChild(titulo);
             filaHead.appendChild(celdaHead);
-            
+
             celdaHead = document.createElement("th");
             titulo = document.createTextNode("FECHA");
             celdaHead.appendChild(titulo);
             filaHead.appendChild(celdaHead);
-            
+
             celdaHead = document.createElement("th");
             titulo = document.createTextNode("HORA");
             celdaHead.appendChild(titulo);
             filaHead.appendChild(celdaHead);
-            
+
             celdaHead = document.createElement("th");
             titulo = document.createTextNode("EDITOR");
             celdaHead.appendChild(titulo);
             filaHead.appendChild(celdaHead);
-            
+
             celdaHead = document.createElement("th");
             titulo = document.createTextNode("EDITAR");
             celdaHead.appendChild(titulo);
             filaHead.appendChild(celdaHead);
-            
+
+            celdaHead = document.createElement("th");
+            titulo = document.createTextNode("STATUS");
+            celdaHead.appendChild(titulo);
+            filaHead.appendChild(celdaHead);
+
             headTabla.appendChild(filaHead);
-            
+
             tabla.appendChild(headTabla);
-            
+
             var cuerpoTabla = document.createElement("tbody");
-            
-            for(var i = 0; i < res.length; i++){
+
+            for (var i = 0; i < res.length; i++) {
                 var filaBody = document.createElement("tr");
                 filaBody.setAttribute("rowspan", "5");
                 var subtitulo = document.createTextNode(res[i].grupo);
                 filaBody.appendChild(subtitulo);
                 cuerpoTabla.appendChild(filaBody);
-                for(var j = 0; j < res[i].partidos.length; j++){
+                for (var j = 0; j < res[i].partidos.length; j++) {
                     filaBody = document.createElement("tr");
                     var celdaBody = document.createElement("td");
                     var partido = document.createTextNode(res[i].partidos[j]);
                     celdaBody.appendChild(partido);
                     filaBody.appendChild(celdaBody);
-                    
+
                     var celdaBody = document.createElement("td");
                     celdaBody.setAttribute("id", "fecha" + res[i].partidos[j]);
-                    var fecha = document.createTextNode(" ");
+                    var fecha = document.createTextNode(res[i].partidos[j].fecha);
                     celdaBody.appendChild(fecha);
                     filaBody.appendChild(celdaBody);
-                    
+
                     var celdaBody = document.createElement("td");
                     celdaBody.setAttribute("id", "hora" + res[i].partidos[j]);
-                    var hora = document.createTextNode(" ");
+                    var hora = document.createTextNode(res[i].partidos[j].hora);
                     celdaBody.appendChild(hora);
                     filaBody.appendChild(celdaBody);
-                    
+
                     var celdaBody = document.createElement("td");
                     celdaBody.setAttribute("id", "editor" + res[i].partidos[j]);
-                    var editor = document.createTextNode(" ");
+                    var editor = document.createTextNode(res[i].partidos[j].editor);
                     celdaBody.appendChild(editor);
                     filaBody.appendChild(celdaBody);
-                    
+
                     var celdaBody = document.createElement("td");
                     var botonEditar = document.createElement("button");
                     botonEditar.setAttribute("class", "btn btn-primary");
@@ -148,10 +153,17 @@ function generarPartidos(idDiv) {
                     botonEditar.appendChild(textoBoton);
                     celdaBody.appendChild(botonEditar);
                     filaBody.appendChild(celdaBody);
+
+
+                    var celdaBody = document.createElement("td");
+                    celdaBody.setAttribute("id", "status" + res[i].partidos[j]);
+                    var status = document.createTextNode(" ");
+                    celdaBody.appendChild(status);
+                    filaBody.appendChild(celdaBody);
                     cuerpoTabla.appendChild(filaBody);
                 }
             }
-            
+
             tabla.appendChild(cuerpoTabla);
             divPartidos.removeChild(boton);
             divPartidos.appendChild(tabla);
@@ -159,7 +171,7 @@ function generarPartidos(idDiv) {
     });
 }
 
-function completarModal(id){
+function completarModal(id) {
     var titulo = document.getElementById("tituloVentana");
     titulo.removeChild(titulo.firstChild);
     titulo.appendChild(document.createTextNode(id));
@@ -167,19 +179,36 @@ function completarModal(id){
     boton.setAttribute("onclick", "actualizarTablaPartidos('" + id + "')");
 }
 
-function actualizarTablaPartidos(id){
-    var fecha = document.getElementById("fecha" + id);
-    var hora = document.getElementById("hora" + id);
-    var editor = document.getElementById("editor" + id);
-    
-    var tfecha = document.getElementById("textFecha").value;
-    var thora = document.getElementById("textHora").value;
-    var teditor = document.getElementById("textEditor").value;
-    
-    fecha.removeChild(fecha.firstChild);
-    fecha.appendChild(document.createTextNode(tfecha));
-    hora.removeChild(hora.firstChild);
-    hora.appendChild(document.createTextNode(thora));
-    editor.removeChild(editor.firstChild);
-    editor.appendChild(document.createTextNode(teditor));
+function actualizarTablaPartidos(id) {
+    $.post('/asignarEditores', function (res, req) {
+        if (res.hasOwnProperty("msg")) {
+            if (res.msg === "ok") {
+                var fecha = document.getElementById("fecha" + id);
+                var hora = document.getElementById("hora" + id);
+                var editor = document.getElementById("editor" + id);
+                var status = document.getElementById("editor" + id);
+
+                var tfecha = document.getElementById("textFecha").value;
+                var thora = document.getElementById("textHora").value;
+                var teditor = document.getElementById("textEditor").value;
+
+                fecha.removeChild(fecha.firstChild);
+                fecha.appendChild(document.createTextNode(tfecha));
+                hora.removeChild(hora.firstChild);
+                hora.appendChild(document.createTextNode(thora));
+                editor.removeChild(editor.firstChild);
+                editor.appendChild(document.createTextNode(teditor));
+                status.removeChild(status.firstChild);
+                status.appendChild(document.createTextNode(res.msg));
+            } else {
+                var status = document.getElementById("editor" + id);
+                status.removeChild(status.firstChild);
+                status.appendChild(document.createTextNode(res.msg));
+            }
+        } else {
+            var status = document.getElementById("editor" + id);
+            status.removeChild(status.firstChild);
+            status.appendChild(document.createTextNode("ERROR"));
+        }
+    });
 }

@@ -24,7 +24,7 @@
     <div class="tab-pane fade show active" id="CrearJugador" role="tabpanel" aria-labelledby="CrearJugador_Tab">
         <br/>
         <div class="container">
-            <form action="{{action('AdminController@crearJugador')}}" method="post">                
+            <form>                
                 @csrf
                 <div class="form-group">
                     <label for="formGroupExampleInput">Nombre</label>
@@ -46,7 +46,7 @@
                     <label for="exampleFormControlTextarea1">Mazo 3</label>
                     <textarea class="form-control" name="InDeck3" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Aceptar</button>
+                <button class="btn btn-primary">Aceptar</button>
             </form>
         </div>
     </div>
@@ -75,7 +75,7 @@
             </div>
             <div class="modal-body" id="ventanaCuerpo">                        
                 <div class="container">
-                    <form action="{{action('AdminController@crearJugador')}}" method="post">                
+                    <form action="{{action('AdminController@asignarEditores')}}" method="post">                
                         @csrf
                         <div class="form-group">
                             <label for="formGroupExampleInput">Fecha</label>
