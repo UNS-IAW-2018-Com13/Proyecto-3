@@ -14,37 +14,7 @@
                     <th>EDITAR</th>
                 </tr>
             </thead>
-            <!--
-            <tbody>
-                @foreach ($partidos as $partido)
-                    <tr>
-                        <td>
-                            {{ $partido->enf1 }}
-                        </td>
-                        <td>
-                            {{ $partido->enf2 }}
-                        </td>
-                        <td>
-                            {{ $partido->enf3 }}
-                        </td>
-                        <td>
-                            {{ $partido->enf4 }}
-                        </td>
-                        <td>
-                            {{ $partido->enf5 }}
-                        </td>
-                        <td>
-                            {{ $partido->comentario }}
-                        </td>
-                        <td>
-                            <button class="btn btn-primary" onclick="generarPartidos('divPartidos');">Editar</button>
-                        </td>
-                        <td>
-                            {{ $partido->msg }}
-                        </td>
-                    </tr>
-                @endforeach
-                -->
+            
             </tbody>
         </table>
     </div>
@@ -69,7 +39,7 @@
                             <input id="textHora" type="text" class="form-control" name="textHora">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput">Hora</label>
+                            <label for="formGroupExampleInput">Editor</label>
                             <input id="textEditor" type="text" class="form-control" name="textEditor">
                         </div>
                         <button id="botonModal" type="submit" class="btn btn-primary">Aceptar</button>  

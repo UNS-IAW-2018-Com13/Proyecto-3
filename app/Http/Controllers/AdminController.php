@@ -26,6 +26,27 @@ class AdminController extends Controller {
             $jugador->idFavorito = sizeof(Jugador::all());
             $jugador->favorito = 0;
             $jugador->mazos = [$parametros->InNombre . "1", $parametros->InNombre . "2", $parametros->InNombre . "3"];
+            
+            $mazo1 = new Mazo();
+            $mazo1->nombre = $parametros->InNombre . "1";
+            $mazo1->clase = "drd";
+            $mazo1->cartas = [["carta", 1]];
+            $mazo1->save();
+            
+            $mazo2 = new Mazo();
+            $mazo2->nombre = $parametros->InNombre . "2";
+            $mazo2->clase = "mag";
+            $mazo2->cartas = [["carta", 1]];
+            $mazo2->save();
+            
+            $mazo3 = new Mazo();
+            $mazo3->nombre = $parametros->InNombre . "3";
+            $mazo3->clase = "sha";
+            $mazo3->cartas = [["carta", 1]];
+            $mazo3->save();
+            
+            $jugador->save();
+            
             /*
               $cards = explode(chr(13), $_POST['InDeck1']);
               $mazo = "{'nombre'='{$_POST['InNombre']}1',
@@ -37,10 +58,10 @@ class AdminController extends Controller {
               $mazo = substr($mazo, 0, -1) . "]}";
               echo $mazo . "<br/>";
              */
-            //$jugador->save();
+            
         } else {
             $jugador = json_decode("{}");
-            $jugador->msg = "existe";
+            $jugador->msg = "Jugador existente.";
         }      
 
         return view('res', ['jugador' => $jugador]);
@@ -49,12 +70,12 @@ class AdminController extends Controller {
     public function generarGrupos() {
         $grupos = Grupos::all();
         if (sizeof($grupos) > 0) {
-            $grupos = Array("msg" => "Grupos ya creados");
+            $grupos = Array("msg" => "Grupos previamente creados.");
             return $grupos;
         } else {
             $jugadores = Jugador::all();
             if (sizeof($jugadores) < 16) {
-                $jugadores = Array("msg" => "no hay suficientes jugadores");
+                $jugadores = Array("msg" => "Tiene que haber 16 jugadores cargados para poder crear los grupos.");
                 return $jugadores;
             } else {
                 $grupos = array(new Grupos(), new Grupos(), new Grupos(), new Grupos());

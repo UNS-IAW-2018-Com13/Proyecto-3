@@ -1,13 +1,11 @@
 function generarGrupos(idDiv) {
-    var divGrupos = document.getElementById(idDiv);
-    var boton = divGrupos.lastChild;
-
     $.get('/generarGrupos', function (res, req) {
+        var divGrupos = document.getElementById(idDiv);
+        var boton = divGrupos.lastChild;
         if (res.hasOwnProperty("msg")) {
             var mensaje = document.createTextNode(res.msg);
             divGrupos.removeChild(boton);
             divGrupos.appendChild(mensaje);
-            divGrupos.appendChild(boton);
         } else {
             var tabla = document.createElement("table");
             tabla.setAttribute("class", "table table-striped");
@@ -59,10 +57,9 @@ function generarGrupos(idDiv) {
 }
 
 function generarPartidos(idDiv) {
-    var divPartidos = document.getElementById(idDiv);
-    var boton = divPartidos.lastChild;
-
     $.get('/generarPartidos', function (res, req) {
+        var divPartidos = document.getElementById(idDiv);
+        var boton = divPartidos.lastChild;
         if (res.hasOwnProperty("msg")) {
             var mensaje = document.createTextNode(res.msg);
             divPartidos.removeChild(boton);

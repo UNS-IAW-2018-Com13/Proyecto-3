@@ -85,10 +85,10 @@
                         <input id="textHora" type="text" class="form-control" name="textHora">
                     </div>
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Hora</label>
+                        <label for="formGroupExampleInput">Editor</label>
                         <input id="textEditor" type="text" class="form-control" name="textEditor">
                     </div>
-                    <button id="botonModal" type="submit" class="btn btn-primary">Aceptar</button>
+                    <button id="botonModal" type="submit" aria-label="Close" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
                 </div>
             </div>
         </div>
