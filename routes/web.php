@@ -11,6 +11,7 @@
 |
 */
 
+/*
 Route::get('/administrador', function () {
     return view('administrador');
 });
@@ -18,6 +19,7 @@ Route::get('/administrador', function () {
 Route::get('/editor', function () {
     return view('editor');
 });
+ */
 
 Route::get('/', function () {
     if( Auth::user()->name === "admin"){
@@ -34,7 +36,5 @@ Route::get('/generarGrupos','AdminController@generarGrupos')->middleware('auth')
 Route::get('/generarPartidos','AdminController@generarPartidos')->middleware('auth');
 
 Route::post('/asignarEditores','AdminController@asignarEditores')->middleware('auth');
-
-
 
 Auth::routes();
