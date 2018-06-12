@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Admin Torneo Hearthstone'),
+    'name' => env('APP_NAME', 'Torneo HS Admin'),
 
     /*
     |--------------------------------------------------------------------------
