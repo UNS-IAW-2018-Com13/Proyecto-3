@@ -12,7 +12,7 @@ return [
       |
      */
 
-    'default' => env('DB_CONNECTION', 'mongodb'),
+    'default' => getenv('DB_CONNECTION'),
     /*
       |--------------------------------------------------------------------------
       | Database Connections
@@ -77,13 +77,13 @@ return [
         
         'mongodb' => [
             'driver' => 'mongodb',
-            'host' => env('DB_HOST', 'ds113200.mlab.com'),
-            'port' => env('DB_PORT', 13200),
-            'database' => env('DB_DATABASE', 'torneos'),
-            'username' => env('DB_USERNAME', 'visitante'),
-            'password' => env('DB_PASSWORD', 'visitante'),
+            'host' => getenv('DB_HOST'),
+            'port' => getenv('DB_PORT'),
+            'database' => getenv('DB_DATABASE'),
+            'username' => getenv('DB_USERNAME'),
+            'password' => getenv('DB_PASSWORD'),
             'options' => [
-                'database' => env('DB_DATABASE', 'torneos') // sets the authentication database required by mongo 3
+                'database' => getenv('DB_DATABASE') // sets the authentication database required by mongo 3
             ]
         ],
     ],
