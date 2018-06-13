@@ -13,6 +13,7 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/administrador.js') }}" defer></script>
+        <script src="{{ asset('js/editor.js') }}" defer></script>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -24,8 +25,8 @@
     </head>
     <body>
         <div id="app">
-            <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-                <div class="container">
+            <nav class="navbar navbar-expand-lg fixed-top">
+                
                     <a class="navbar-brand" href="/">
                         <img src="/images/icons/icono.png" width="40" height="40">
                     </a>
@@ -65,7 +66,7 @@
                             @endguest
                         </ul>
                     </div>
-                </div>
+                
             </nav>
 
             <main class="py-4">

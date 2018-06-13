@@ -144,7 +144,7 @@ function generarPartidos(idDiv) {
                     botonEditar.setAttribute("class", "btn btn-primary");
                     botonEditar.setAttribute("data-toggle", "modal");
                     botonEditar.setAttribute("data-target", "#ventanaPartido");
-                    botonEditar.setAttribute("onclick", "completarModal('" + res[i].partidos[j].id + "')");
+                    botonEditar.setAttribute("onclick", "completarModalAdmin('" + res[i].partidos[j].id + "')");
                     var textoBoton = document.createTextNode("Editar");
                     botonEditar.appendChild(textoBoton);
                     celdaBody.appendChild(botonEditar);
@@ -167,15 +167,15 @@ function generarPartidos(idDiv) {
     });
 }
 
-function completarModal(id) {
+function completarModalAdmin(id) {
     var titulo = document.getElementById("tituloVentana");
     titulo.removeChild(titulo.firstChild);
     titulo.appendChild(document.createTextNode(id));
     var boton = document.getElementById("botonModal");
-    boton.setAttribute("onclick", "actualizarTablaPartidos('" + id + "')");
+    boton.setAttribute("onclick", "actualizarTablaPartidosAdmin('" + id + "')");
 }
 
-function actualizarTablaPartidos(id) {    
+function actualizarTablaPartidosAdmin(id) {    
     var tfecha = document.getElementById("textFecha").value;
     var thora = document.getElementById("textHora").value;
     var teditor = document.getElementById("textEditor").value;

@@ -10,13 +10,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller {
+    
+    public function inicio(){
+        return view('administrador');
+    }
 
-    /**
-     * Show the profile for the given user.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function crearJugador(Request $parametros) {
         $jugador = Jugador::where('nombre', '=', $parametros->InNombre)->get();
         if (sizeof($jugador) == 0) {
@@ -119,15 +117,29 @@ class AdminController extends Controller {
                 for ($c1 = 0; $c1 < sizeof($integ); $c1++) {
                     for ($c2 = $c1 + 1; $c2 < sizeof($integ); $c2++) {
                         $partido = new Partidos();
-                        $partido->fecha = "";
-                        $partido->hora = "";
-                        $partido->jugador1 = $integ[$c1];
-                        $partido->mazosJugador1 = array();
-                        $partido->jugador2 = $integ[$c2];
-                        $partido->mazosJugador2 = array();
-                        $partido->ganador = array();
-                        $partido->editor = "";
                         $partido->id = $integ[$c1] . chr(47) . $integ[$c2];
+                        $partido->fecha = "-";
+                        $partido->hora = "-";
+                        $partido->jugador1 = $integ[$c1];
+                        $partido->jugador2 = $integ[$c2];
+                        $partido->rounds = array(array("ganador" => "-",
+                                                       "mazoG" => "-",
+                                                       "mazoP" => "-"),
+                                                 array("ganador" => "-",
+                                                       "mazoG" => "-",
+                                                       "mazoP" => "-"),
+                                                 array("ganador" => "-",
+                                                       "mazoG" => "-",
+                                                       "mazoP" => "-"),
+                                                 array("ganador" => "-",
+                                                       "mazoG" => "-",
+                                                       "mazoP" => "-"),
+                                                 array("ganador" => "-",
+                                                       "mazoG" => "-",
+                                                       "mazoP" => "-"));
+                        $partido->editor = "-";
+                        $partido->comentario = "-";
+                        
 
                         $partido->save();
 
@@ -148,7 +160,7 @@ class AdminController extends Controller {
             $partido[0]->editor = $parametros->editor;
             $partido[0]->save();
             return (array('msg' => "ok"));
-        };
+        }
         return (array('msg' => "fail"));
     }
 
