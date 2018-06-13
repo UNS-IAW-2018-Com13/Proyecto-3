@@ -11,30 +11,29 @@
 |
 */
 
-/*
-Route::get('/administrador', function () {
-    return view('administrador');
-});
-
-Route::get('/editor', function () {
-    return view('editor');
-});
- */
-
+// LOGIN ROUTE
 Route::get('/', function () {
     if( Auth::user()->name === "admin"){
-        return view('administrador');
+        return redirect()->route('administrador');
     }else{
-        return view('editor');
+        return redirect()->route('editor');
     }
 })->middleware('auth');
 
-Route::post('/addJugador','AdminController@crearJugador')->middleware('auth');
+// ADMIN ROUTES
+Route::get('/administrador', 'AdminController@inicio')->name('administrador')->middleware('auth');
 
-Route::get('/generarGrupos','AdminController@generarGrupos')->middleware('auth');
+Route::post('/addJugador', 'AdminController@crearJugador')->middleware('auth');
 
-Route::get('/generarPartidos','AdminController@generarPartidos')->middleware('auth');
+Route::get('/generarGrupos', 'AdminController@generarGrupos')->middleware('auth');
 
-Route::post('/asignarEditores','AdminController@asignarEditores')->middleware('auth');
+Route::get('/generarPartidos', 'AdminController@generarPartidos')->middleware('auth');
+
+Route::post('/asignarEditores', 'AdminController@asignarEditores')->middleware('auth');
+
+// EDITOR ROUTES
+Route::get('/editor', 'EditorController@obtenerPartidos')->name('editor')->middleware('auth');
+
+Route::post('/editor/editarPartido', 'EditorController@editarPartido')->middleware('auth');
 
 Auth::routes();

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<br/>
+<br/>
 <div class="container">
     <div class="row">
         <div class="col-3"></div>
@@ -73,7 +75,6 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
             <div class="modal-body" id="ventanaCuerpo">                        
                 <div class="container">                    
                     <div class="form-group">
