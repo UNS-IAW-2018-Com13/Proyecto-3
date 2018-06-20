@@ -215,6 +215,7 @@ class AdminController extends Controller {
                 $resultado = Array("cod" => "FG", "msg" => "Tienen que estar creados los grupos para poder crear los partidos.");
                 return $resultado;
             }
+            $lista = Array();
             for ($i = 0; $i < sizeof($grupos); $i++) {
                 $integ = $grupos[$i]->integrantes;
                 for ($c1 = 0; $c1 < sizeof($integ); $c1++) {
@@ -243,10 +244,11 @@ class AdminController extends Controller {
                         $partido->editor = "-";
                         $partido->comentario = "-";
                         $partido->save();
+                        $lista[] = $partido;
                     }
                 }
             }
-            $lista = Partidos::all();
+            //$lista = Partidos::all();
             $resultado = Array("cod" => "PCC", "msg" => "Partidos generados correctamente.", "partidos" => $lista);
             return $resultado;
         }
