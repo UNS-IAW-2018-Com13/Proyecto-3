@@ -248,7 +248,6 @@ class AdminController extends Controller {
                     }
                 }
             }
-            //$lista = Partidos::all();
             $resultado = Array("cod" => "PCC", "msg" => "Partidos generados correctamente.", "partidos" => $lista);
             return $resultado;
         }
