@@ -138,8 +138,8 @@ function crearJugador(idDivMsg, idDivRes) {
     var tnombre = document.getElementById("textNombre").value;
     var tavatar = document.getElementById("textAvatar").value;
     var tmazo1 = document.getElementById("textMazo1").value;
-    var tmazo2 = document.getElementById("textMazo1").value;
-    var tmazo3 = document.getElementById("textMazo1").value;
+    var tmazo2 = document.getElementById("textMazo2").value;
+    var tmazo3 = document.getElementById("textMazo3").value;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
