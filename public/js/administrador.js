@@ -469,7 +469,7 @@ function verPartidos(idDivMsg, idDivRes) {
                 botonEditar.setAttribute("class", "btn btn-primary");
                 botonEditar.setAttribute("data-toggle", "modal");
                 botonEditar.setAttribute("data-target", "#ventanaPartido");
-                botonEditar.setAttribute("onclick", "completarModalPartidosAdmin('" + res.partidos[i].id + "')");
+                botonEditar.setAttribute("onclick", "modalPartidosAdmin('" + res.partidos[i].id + "')");
                 var textoBoton = document.createTextNode("Editar");
                 botonEditar.appendChild(textoBoton);
                 celdaBody.appendChild(botonEditar);

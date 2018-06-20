@@ -86,3 +86,9 @@ function actualizarTablaPartidosEditor(id) {
         }
     });
 }
+
+/*
+ * overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+ */
