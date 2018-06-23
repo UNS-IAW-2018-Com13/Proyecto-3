@@ -710,8 +710,6 @@ function modalPartidosAdmin(idPartido, idDivMsg, idDivRes) {
     var boton = document.getElementById("botonModal");
     boton.setAttribute("onclick", "asignarEditor('" + idPartido + "', '" + idDivMsg + "', '" + idDivRes + "')");
 }
-<<<<<<< HEAD
-=======
 
 function modalJugadorAdmin(idJugador, idDivMsg, idDivRes) {
     var titulo = document.getElementById("tituloVentanaEditar");
@@ -720,4 +718,3 @@ function modalJugadorAdmin(idJugador, idDivMsg, idDivRes) {
     var boton = document.getElementById("botonModalEditar");
     boton.setAttribute("onclick", "editarJugador('" + idJugador + "', '" + idDivMsg + "', '" + idDivRes + "')");
 }
->>>>>>> 8008fb93a9c6b4353f7eae57626d2409a8c4f45e
