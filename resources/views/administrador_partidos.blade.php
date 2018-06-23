@@ -5,7 +5,9 @@
 <br/>
 <div class="container">
     <div class="container-fluid" id="divMensajes">
-
+        @if ($msg !== "ok")
+        {{ $msg }}
+        @endif
     </div>
     <div class="container-fluid" id="divResultados">
 
@@ -29,21 +31,28 @@
                 </button>
             </div>
             <div class="modal-body" id="ventanaCuerpo">                        
-                <div class="container">                    
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Fecha</label>
-                        <input id="textFecha" type="text" class="form-control" name="textFecha">
+                <div class="container">
                     </div>
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Hora</label>
-                        <input id="textHora" type="text" class="form-control" name="textHora">
+                        <label>Fecha</label>
+                        <input id="textFecha" type="date" class="form-control" name="textFecha" value="2018-01-01">
                     </div>
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Editor</label>
-                        <input id="textEditor" type="text" class="form-control" name="textEditor">
+                        <label>Hora</label>
+                        <input id="textHora" type="time" class="form-control" name="textHora" value="00:00">
                     </div>
-                    <button id="botonModal" type="submit" aria-label="Close" 
-                            class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                    <div class="form-group">
+                        <label>Editor</label>
+                        <select class="custom-select" id="selectEditor">
+                            <option selected>Seleccionar...</option>
+                            @for ($i = 0; $i < sizeof($editores); $i++)
+                            <option value="{{$editores[$i]}}">{{$editores[$i]}}</option>
+                            @endfor
+                        </select>
+                    </div>
+                    <div class="container">
+                        <button id="botonModal" aria-label="Close" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,8 +72,8 @@
             <div class="modal-body" id="ventanaCuerpo">
                 <div class="container">
                     <h4>CUIDADO!</h5>
-                    <h5>Estas a punto de borrar todos los partidos del torneo!</h5>
-                    <h5>Estas seguro que queres hacer esto?</h5>
+                        <h5>Estas a punto de borrar todos los partidos del torneo!</h5>
+                        <h5>Estas seguro que queres hacer esto?</h5>
                 </div>
                 <br/>
                 <div class="container">                    

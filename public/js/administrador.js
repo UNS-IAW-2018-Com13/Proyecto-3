@@ -102,7 +102,7 @@ function verJugadores(idDivMsg, idDivRes) {
                 botonEditar.setAttribute("class", "btn btn-primary");
                 botonEditar.setAttribute("data-toggle", "modal");
                 botonEditar.setAttribute("data-target", "#ventanaEditarJugador");
-                //botonEditar.setAttribute("onclick", "completarModalJugadorAdmin('" + res.jugadores[i].nombre + "')");
+                botonEditar.setAttribute("onclick", "modalJugadorAdmin('" + res.jugadores[i].nombre + "', '" + idDivMsg + "', '" + idDivRes + "')");
                 var textoBoton = document.createTextNode("Editar");
                 botonEditar.appendChild(textoBoton);
                 celdaBody.appendChild(botonEditar);
@@ -135,11 +135,11 @@ function verJugadores(idDivMsg, idDivRes) {
 }
 
 function crearJugador(idDivMsg, idDivRes) {
-    var tnombre = document.getElementById("textNombre").value;
-    var tavatar = document.getElementById("textAvatar").value;
-    var tmazo1 = document.getElementById("textMazo1").value;
-    var tmazo2 = document.getElementById("textMazo2").value;
-    var tmazo3 = document.getElementById("textMazo3").value;
+    var tnombre = document.getElementById("textNombreC").value;
+    var tavatar = document.getElementById("textAvatarC").value;
+    var tmazo1 = document.getElementById("textMazo1C").value;
+    var tmazo2 = document.getElementById("textMazo2C").value;
+    var tmazo3 = document.getElementById("textMazo3C").value;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -216,6 +216,10 @@ function eliminarUltimoJugador(idDivMsg, idDivRes) {
             divRes.appendChild(vacio);
         }
     });
+}
+
+function editarJugador(idJugador, idDivMsg, idDivRes){
+    console.log("FALTA HACER");
 }
 
 function verGrupos(idDivMsg, idDivRes) {
@@ -469,7 +473,7 @@ function verPartidos(idDivMsg, idDivRes) {
                 botonEditar.setAttribute("class", "btn btn-primary");
                 botonEditar.setAttribute("data-toggle", "modal");
                 botonEditar.setAttribute("data-target", "#ventanaPartido");
-                botonEditar.setAttribute("onclick", "completarModalPartidosAdmin('" + res.partidos[i].id + "')");
+                botonEditar.setAttribute("onclick", "modalPartidosAdmin('" + res.partidos[i].id + "', '" + idDivMsg + "', '" + idDivRes + "')");
                 var textoBoton = document.createTextNode("Editar");
                 botonEditar.appendChild(textoBoton);
                 celdaBody.appendChild(botonEditar);
@@ -641,13 +645,13 @@ function eliminarPartidos(idDivMsg, idDivRes) {
 function asignarEditor(idPartido, idDivMsg, idDivRes) {
     var tfecha = document.getElementById("textFecha").value;
     var thora = document.getElementById("textHora").value;
-    var teditor = document.getElementById("textEditor").value;
+    var selEditor = document.getElementById("selectEditor").value;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $.post('/administrador/asignarEditores', {"id": idPartido, "fecha": tfecha, "hora": thora, "editor": teditor}, function (res, req) {
+    $.post('/administrador/asignarEditores', {"id": idPartido, "fecha": tfecha, "hora": thora, "editor": selEditor}, function (res, req) {
         var divMsg = document.getElementById(idDivMsg);
         var mensaje = document.createTextNode(res.msg);
 
@@ -662,7 +666,7 @@ function asignarEditor(idPartido, idDivMsg, idDivRes) {
             hora.removeChild(hora.firstChild);
             hora.appendChild(document.createTextNode(thora));
             editor.removeChild(editor.firstChild);
-            editor.appendChild(document.createTextNode(teditor));
+            editor.appendChild(document.createTextNode(selEditor));
             status.removeChild(status.firstChild);
             status.appendChild(document.createTextNode("OK"));
         } else {
@@ -706,3 +710,14 @@ function modalPartidosAdmin(idPartido, idDivMsg, idDivRes) {
     var boton = document.getElementById("botonModal");
     boton.setAttribute("onclick", "asignarEditor('" + idPartido + "', '" + idDivMsg + "', '" + idDivRes + "')");
 }
+<<<<<<< HEAD
+=======
+
+function modalJugadorAdmin(idJugador, idDivMsg, idDivRes) {
+    var titulo = document.getElementById("tituloVentanaEditar");
+    titulo.removeChild(titulo.firstChild);
+    titulo.appendChild(document.createTextNode("Editar " + idJugador));
+    var boton = document.getElementById("botonModalEditar");
+    boton.setAttribute("onclick", "editarJugador('" + idJugador + "', '" + idDivMsg + "', '" + idDivRes + "')");
+}
+>>>>>>> 8008fb93a9c6b4353f7eae57626d2409a8c4f45e
