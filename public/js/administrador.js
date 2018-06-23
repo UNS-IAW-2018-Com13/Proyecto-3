@@ -469,7 +469,7 @@ function verPartidos(idDivMsg, idDivRes) {
                 botonEditar.setAttribute("class", "btn btn-primary");
                 botonEditar.setAttribute("data-toggle", "modal");
                 botonEditar.setAttribute("data-target", "#ventanaPartido");
-                botonEditar.setAttribute("onclick", "modalPartidosAdmin('" + res.partidos[i].id + "')");
+                botonEditar.setAttribute("onclick", "modalPartidosAdmin('" + res.partidos[i].id + "', '" + idDivMsg + "', '" + idDivRes + "')");
                 var textoBoton = document.createTextNode("Editar");
                 botonEditar.appendChild(textoBoton);
                 celdaBody.appendChild(botonEditar);
@@ -641,13 +641,13 @@ function eliminarPartidos(idDivMsg, idDivRes) {
 function asignarEditor(idPartido, idDivMsg, idDivRes) {
     var tfecha = document.getElementById("textFecha").value;
     var thora = document.getElementById("textHora").value;
-    var teditor = document.getElementById("textEditor").value;
+    var selEditor = document.getElementById("selectEditor").value;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $.post('/administrador/asignarEditores', {"id": idPartido, "fecha": tfecha, "hora": thora, "editor": teditor}, function (res, req) {
+    $.post('/administrador/asignarEditores', {"id": idPartido, "fecha": tfecha, "hora": thora, "editor": selEditor}, function (res, req) {
         var divMsg = document.getElementById(idDivMsg);
         var mensaje = document.createTextNode(res.msg);
 
@@ -662,7 +662,7 @@ function asignarEditor(idPartido, idDivMsg, idDivRes) {
             hora.removeChild(hora.firstChild);
             hora.appendChild(document.createTextNode(thora));
             editor.removeChild(editor.firstChild);
-            editor.appendChild(document.createTextNode(teditor));
+            editor.appendChild(document.createTextNode(selEditor));
             status.removeChild(status.firstChild);
             status.appendChild(document.createTextNode("OK"));
         } else {

@@ -6,6 +6,7 @@ use App\Jugadores;
 use App\Mazos;
 use App\Grupos;
 use App\Partidos;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -53,7 +54,7 @@ class AdminController extends Controller {
             $jugador->idFavorito = sizeof(Jugadores::all());
             $jugador->favorito = 0;
             $jugador->mazos = [$parametros->nombre . "1", $parametros->nombre . "2", $parametros->nombre . "3"];
-            
+
             //$avatar = $parametros->avatar;
 
             $mazo1 = new Mazos();
@@ -94,30 +95,30 @@ class AdminController extends Controller {
         $res = Array("cod" => "FAIL", "msg" => "Jugador previamente cargado.");
         return $res;
     }
-    
+
     public function eliminarUltimoJugador() {
         $idFav = sizeof(Jugadores::all());
-        if($idFav === 16){
+        if ($idFav === 16) {
             $res = Array("cod" => "FAIL", "msg" => "No se puede eliminar este jugador en este momento.");
             return $res;
         }
-        
+
         $jugador = Jugadores::where('idFavorito', '=', ($idFav - 1))->get();
         $m1 = Mazos::where('nombre', '=', ($jugador[0]->nombre . "1"))->get();
         $m2 = Mazos::where('nombre', '=', ($jugador[0]->nombre . "2"))->get();
         $m3 = Mazos::where('nombre', '=', ($jugador[0]->nombre . "3"))->get();
-        
+
         $nombreJ = $jugador[0]->nombre;
-        
+
         $jugador[0]->delete();
         $m1[0]->delete();
         $m2[0]->delete();
         $m3[0]->delete();
-        
+
         $res = Array("cod" => "OK", "msg" => "El jugador " . $nombreJ . " y sus mazos fueron eliminados correctamente.");
         return $res;
     }
-    
+
     public function eliminarJugadores() {
         $res = Array("cod" => "FAIL", "msg" => "No se pueden eliminar los jugadores en este momento.");
         return $res;
@@ -190,7 +191,17 @@ class AdminController extends Controller {
     }
 
     public function partidos() {
-        return view('administrador_partidos');
+        $editores = User::where('rol', '=', "editor")->get();
+        $edit = Array();
+        if (sizeof($editores) > 0) {
+            for ($i = 0; $i < sizeof($editores); $i++) {
+                $edit[] = $editores[$i]->name;
+            }
+            return view('administrador_partidos', ['msg' => "ok", 'editores' => $edit]);
+        }
+        else{
+            return view('administrador_partidos', ['msg' => "No hay editores registrados para el torneo. No se podran asignar editores a los partidos.", 'editores' => $edit]);
+        }
     }
 
     public function verPartidos() {
@@ -269,11 +280,20 @@ class AdminController extends Controller {
     public function asignarEditores(Request $parametros) {
         $partido = Partidos::where('id', '=', $parametros->id)->get();
         if (sizeof($partido) > 0) {
+            if($parametros->fecha === null){
+                return Array("cod" => "FAIL", "msg" => "La fecha ingresada no es valida. No se realizaron cambios en el partido.");
+            }
+            if($parametros->hora === null){
+                return Array("cod" => "FAIL", "msg" => "La hora ingresada no es valida. No se realizaron cambios en el partido.");
+            }
+            if($parametros->editor === "Seleccionar..."){
+                return Array("cod" => "FAIL", "msg" => "El editor seleccionado no es valido. No se realizaron cambios en el partido.");
+            }
             $partido[0]->fecha = $parametros->fecha;
             $partido[0]->hora = $parametros->hora;
             $partido[0]->editor = $parametros->editor;
             $partido[0]->save();
-            return Array("cod" => "OK", "msg" => "Partido " . $parametros->id . " actualizado correctamente con editor asignado.");
+            return Array("cod" => "OK", "msg" => "Partido " . $parametros->id . " actualizado correctamente. " . $parametros->editor . " asignado correctamente.");
         }
         return Array("cod" => "FAIL", "msg" => "No hay partidos para editar.");
     }
