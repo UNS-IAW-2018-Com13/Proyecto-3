@@ -14,7 +14,7 @@ nav{
 .navbar-toggler{
     border-color: darkgoldenrod;
 }
-    
+
 .nav-link{
     color: darkgoldenrod;
     font-weight: bold;
@@ -26,9 +26,20 @@ nav{
 }
 
 .dropdown-menu{
-    color: darkgoldenrod;
     font-style: italic;
     background-image: url("/images/style-def/barra.jpg");
+
+}
+.modal-body > div > .dropdown-menu{   
+    background-image: url("/images/style-def/background.jpg");
+}
+.modal-body > div > .dropdown-menu > .dropdown-item {
+    color: sienna;
+}
+
+.dropdown-item{
+    color: darkgoldenrod;
+    cursor: pointer;
 }
 .dropdown-item:hover{
     background-color: transparent;
@@ -50,7 +61,7 @@ nav{
 
 .modal-body{
     background-image: url("/images/style-def/background.jpg");
-    color:sienna
+    color:sienna;
 }
 
 .modal-header{
@@ -63,15 +74,15 @@ button > span{
 }
 
 .btn-primary {
-	background-color: transparent;
-	border-color: darkgoldenrod;
-	color: darkgoldenrod;
+    background-color: transparent;
+    border-color: darkgoldenrod;
+    color: darkgoldenrod;
 }
 
 .btn-primary:hover {
-	background-color: sienna;
-	border-color: darkgoldenrod;
-	color: #000080;
+    background-color: sienna;
+    border-color: darkgoldenrod;
+    color: #000080;
 }
 
 tbody > tr:hover{
