@@ -216,3 +216,9 @@ td {
 .forgot-password:focus{
     color: rgb(12, 97, 33);
 }
+
+/*En las celdas de comentario de partidos para q no se rompa la tabla
+overflow:hidden;
+white-space:nowrap;
+text-overflow: ellipsis;
+*/

@@ -22,6 +22,7 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link id="maincss" rel='stylesheet' href='/css/standard.css' />
+
     </head>
     <body>
         <div id="app">
@@ -38,17 +39,17 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                            @if(Auth::user()->rol === "admin")
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin_jug') }}">Jugadores</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin_grup') }}">Grupos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin_part') }}">Partidos</a>
-                                </li>
-                            @endif
+                        @if(Auth::user()->rol === "admin")
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin_jug') }}">Jugadores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin_grup') }}">Grupos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin_part') }}">Partidos</a>
+                        </li>
+                        @endif
                         @endauth
                     </ul>
 
