@@ -14,6 +14,8 @@
     <table class="table table-striped" id="TPartidos">
         <thead>
             <tr>
+                <th>Status</th>
+                <th>Editar</th>
                 <th>Ganador R1</th>
                 <th>Mazo G R1</th>
                 <th>Mazo P R1</th>
@@ -30,12 +32,20 @@
                 <th>Mazo G R5</th>
                 <th>Mazo P R5</th>
                 <th>Comentario</th>
-                <th>Editar</th>
-                <th>Status</th>
             </tr>
         </thead>
         @for ($i = 0; $i < sizeof($partidos); $i++)
         <tr>
+            <td id="STAT{{ json_decode($partidos[$i])->id }}">
+                -
+            </td>
+            <td>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#ventanaPartido" onclick="completarModalEditor('{{ json_decode($partidos[$i])->id }}',
+                        '{{ json_decode($partidos[$i])->jugador1 }}' ,
+                        '{{ json_decode($partidos[$i])->jugador2 }}' ,
+                        {{ json_encode($mazos[json_decode($partidos[$i])->jugador1]) }} ,
+                        {{ json_encode($mazos[json_decode($partidos[$i])->jugador2]) }});">Editar</button>
+            </td>
             @for ($j = 0; $j < sizeof(json_decode($partidos[$i])->rounds); $j++)
             <td id="R{{ $j + 1 }}{{ json_decode($partidos[$i])->id }}">
                 {{ json_decode($partidos[$i])->rounds[$j]->ganador }}
@@ -49,16 +59,6 @@
             @endfor
             <td id="COM{{ json_decode($partidos[$i])->id }}">
                 {{ json_decode($partidos[$i])->comentario }}
-            </td>
-            <td>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#ventanaPartido" onclick="completarModalEditor('{{ json_decode($partidos[$i])->id }}',
-                        '{{ json_decode($partidos[$i])->jugador1 }}' ,
-                        '{{ json_decode($partidos[$i])->jugador2 }}' ,
-                        {{ json_encode($mazos[json_decode($partidos[$i])->jugador1]) }} ,
-                        {{ json_encode($mazos[json_decode($partidos[$i])->jugador2]) }});">Editar</button>
-            </td>
-            <td id="STAT{{ json_decode($partidos[$i])->id }}">
-                -
             </td>
         </tr>
         @endfor

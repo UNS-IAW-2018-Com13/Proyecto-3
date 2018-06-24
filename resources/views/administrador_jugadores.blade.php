@@ -16,8 +16,6 @@
         <button class="btn btn-primary" data-toggle="modal" data-target="#ventanaCrearJugador">Crear Jugador</button>
         <button class="btn btn-primary" data-toggle="modal" data-target="#ventanaConfirmacionJ"
                 onclick="modalAdvertenciaJugadoresAdmin('divMensajes', 'divResultados');">Eliminar Jugadores</button>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#ventanaConfirmacionUJ"
-                onclick="modalAdvertenciaUltimoJugadorAdmin('divMensajes', 'divResultados');">Eliminar Ultimo Jugador</button>
     </div>
 </div>
 
@@ -39,7 +37,7 @@
                     </div>
                     <div class="form-group">
                         <label>Avatar</label>
-                        <input type="file" id="textAvatarC" class="form-control">
+                        <input type="file" id="textAvatarC" class="form-control" accept="image/*">
                     </div>
                     <div class="form-group">
                         <label>Clase Mazo 1</label>
@@ -115,7 +113,7 @@
                     </div>
                     <div class="form-group">
                         <label>Avatar</label>
-                        <input type="file" id="textAvatarE" class="form-control">
+                        <input type="file" id="textAvatarE" class="form-control" accept="image/*">
                     </div>
                     <div class="form-group">
                         <label>Clase Mazo 1</label>
@@ -167,34 +165,6 @@
                                 class="btn btn-primary" data-dismiss="modal"
                                 onclick="editarJugador('divMensajes', 'divResultados')">Aceptar</button>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ventanaConfirmacionUJ" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">ADVERTENCIA</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <h4>CUIDADO!</h5>
-                        <h5>Estas a punto de borrar el ultimo jugador agregado al torneo!</h5>
-                        <h5>Estas seguro que queres hacer esto?</h5>
-                </div>
-                <br/>
-                <div class="container">                    
-                    <button id="botonConfirmarUJ" aria-label="Close" class="btn btn-primary"
-                            data-dismiss="modal">SI! Borremos al jugador!</button>
-                    <button aria-label="Close" class="btn btn-primary"
-                            data-dismiss="modal">Nop, no borremos nada!</button>
                 </div>
             </div>
         </div>

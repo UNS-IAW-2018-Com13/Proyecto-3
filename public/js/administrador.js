@@ -1,3 +1,4 @@
+
 function verJugadores(idDivMsg, idDivRes) {
     $.get('/administrador/verJugadores', function (res, req) {
         var divMsg = document.getElementById(idDivMsg);
@@ -47,11 +48,6 @@ function verJugadores(idDivMsg, idDivRes) {
             celdaHead.appendChild(titulo);
             filaHead.appendChild(celdaHead);
 
-            celdaHead = document.createElement("th");
-            titulo = document.createTextNode("STATUS");
-            celdaHead.appendChild(titulo);
-            filaHead.appendChild(celdaHead);
-
             headTabla.appendChild(filaHead);
 
             tabla.appendChild(headTabla);
@@ -59,17 +55,14 @@ function verJugadores(idDivMsg, idDivRes) {
             var cuerpoTabla = document.createElement("tbody");
 
             for (var i = 0; i < res.jugadores.length; i++) {
-                /*
-                 var filaBody = document.createElement("tr");
-                 var celdaBody = document.createElement("td");
-                 celdaBody.setAttribute("id", "avatar" + res.jugadores[i].nombre);
-                 var avatar = document.createTextNode(res.jugadores[i].avatar);
-                 celdaBody.appendChild(partido);
-                 filaBody.appendChild(celdaBody);
-                 */
+
                 var filaBody = document.createElement("tr");
                 var celdaBody = document.createElement("td");
-                var avatar = document.createTextNode("");
+                celdaBody.setAttribute("id", "avatar" + res.jugadores[i].nombre);
+                var avatar = document.createElement("img");
+                avatar.setAttribute("src", res.jugadores[i].avatar);
+                avatar.setAttribute("height", 42);
+                avatar.setAttribute("width", 42);
                 celdaBody.appendChild(avatar);
                 filaBody.appendChild(celdaBody);
 
@@ -108,12 +101,6 @@ function verJugadores(idDivMsg, idDivRes) {
                 celdaBody.appendChild(botonEditar);
                 filaBody.appendChild(celdaBody);
 
-
-                var celdaBody = document.createElement("td");
-                celdaBody.setAttribute("id", "status" + res.jugadores[i].nombre);
-                var status = document.createTextNode("-");
-                celdaBody.appendChild(status);
-                filaBody.appendChild(celdaBody);
                 cuerpoTabla.appendChild(filaBody);
             }
             tabla.appendChild(cuerpoTabla);
@@ -136,44 +123,65 @@ function verJugadores(idDivMsg, idDivRes) {
 
 function crearJugador(idDivMsg, idDivRes) {
     var tnombre = document.getElementById("textNombreC").value;
-    var tavatar = document.getElementById("textAvatarC").value;
+    var tavatar = document.getElementById("textAvatarC").files[0];
     var tmazo1 = document.getElementById("textMazo1C").value;
     var tmazo2 = document.getElementById("textMazo2C").value;
     var tmazo3 = document.getElementById("textMazo3C").value;
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.post('/administrador/crearJugador', {"nombre": tnombre, "avatar": tavatar,
-        "mazo1": tmazo1, "mazo2": tmazo2, "mazo3": tmazo3}, function (res, req) {
-        var divMsg = document.getElementById(idDivMsg);
-        var divRes = document.getElementById(idDivRes);
-        var mensaje = document.createTextNode(res.msg);
-        if (res.cod === "OK") {
-            var divJug = document.createElement("div");
-            divJug.appendChild(document.createTextNode("Nombre: " + tnombre));
-            divJug.appendChild(document.createElement("br"));
-            divJug.appendChild(document.createTextNode("Clase Mazo 1: " + tmazo1));
-            divJug.appendChild(document.createElement("br"));
-            divJug.appendChild(document.createTextNode("Clase Mazo 2: " + tmazo2));
-            divJug.appendChild(document.createElement("br"));
-            divJug.appendChild(document.createTextNode("Clase Mazo 3: " + tmazo3));
-            if (divRes.firstChild !== null) {
-                divRes.removeChild(divRes.firstChild);
-                divRes.appendChild(divJug);
-            } else {
-                divRes.appendChild(divJug);
-            }
-        }
 
+    var reader = new FileReader();
+    reader.readAsDataURL(tavatar);
+    reader.onload = function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.post('/administrador/crearJugador', {"nombre": tnombre, "avatar": reader.result,
+            "mazo1": tmazo1, "mazo2": tmazo2, "mazo3": tmazo3}, function (res, req) {
+            var divMsg = document.getElementById(idDivMsg);
+            var divRes = document.getElementById(idDivRes);
+            var mensaje = document.createTextNode(res.msg);
+            if (res.cod === "OK") {
+                var divJug = document.createElement("div");
+                divJug.appendChild(document.createTextNode("Nombre: " + tnombre));
+                divJug.appendChild(document.createElement("br"));
+                divJug.appendChild(document.createTextNode("Clase Mazo 1: " + tmazo1));
+                divJug.appendChild(document.createElement("br"));
+                divJug.appendChild(document.createTextNode("Clase Mazo 2: " + tmazo2));
+                divJug.appendChild(document.createElement("br"));
+                divJug.appendChild(document.createTextNode("Clase Mazo 3: " + tmazo3));
+                divJug.appendChild(document.createElement("br"));
+                divJug.appendChild(document.createTextNode("Avatar: "));
+                var avatar = document.createElement("img");
+                avatar.setAttribute("height", 50);
+                avatar.setAttribute("width", 50);
+                avatar.setAttribute("src", reader.result);
+                divJug.appendChild(avatar);
+                if (divRes.firstChild !== null) {
+                    divRes.removeChild(divRes.firstChild);
+                    divRes.appendChild(divJug);
+                } else {
+                    divRes.appendChild(divJug);
+                }
+            }
+
+            if (divMsg.firstChild !== null) {
+                divMsg.removeChild(divMsg.firstChild);
+                divMsg.appendChild(mensaje);
+            } else {
+                divMsg.appendChild(mensaje);
+            }
+        });
+    };
+    reader.onerror = function (error) {
+        var divMsg = document.getElementById(idDivMsg);
         if (divMsg.firstChild !== null) {
             divMsg.removeChild(divMsg.firstChild);
-            divMsg.appendChild(mensaje);
+            divMsg.appendChild("Error al cargar la imagen: " + error);
         } else {
-            divMsg.appendChild(mensaje);
+            divMsg.appendChild("Error al cargar la imagen: " + error);
         }
-    });
+    };
 }
 
 function eliminarJugadores(idDivMsg, idDivRes) {
@@ -197,29 +205,66 @@ function eliminarJugadores(idDivMsg, idDivRes) {
     });
 }
 
-function eliminarUltimoJugador(idDivMsg, idDivRes) {
-    $.get('/administrador/eliminarUltimoJugador', function (res, req) {
+function editarJugador(idJugador, idDivMsg, idDivRes) {
+    var tnombre = document.getElementById("textNombreE").value;
+    var tavatar = document.getElementById("textAvatarE").files[0];
+    var tmazo1 = document.getElementById("textMazo1E").value;
+    var tmazo2 = document.getElementById("textMazo2E").value;
+    var tmazo3 = document.getElementById("textMazo3E").value;
+    var reader = new FileReader();
+    reader.readAsDataURL(tavatar);
+    reader.onload = function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.post('/administrador/editarJugador', {"id": idJugador, "nombre": tnombre, "avatar": reader.result,
+            "mazo1": tmazo1, "mazo2": tmazo2, "mazo3": tmazo3}, function (res, req) {
+            var divMsg = document.getElementById(idDivMsg);
+            var divRes = document.getElementById(idDivRes);
+            var mensaje = document.createTextNode(res.msg);
+            if (res.cod === "OK") {
+                var divJug = document.createElement("div");
+                divJug.appendChild(document.createTextNode("Nombre: " + tnombre));
+                divJug.appendChild(document.createElement("br"));
+                divJug.appendChild(document.createTextNode("Clase Mazo 1: " + tmazo1));
+                divJug.appendChild(document.createElement("br"));
+                divJug.appendChild(document.createTextNode("Clase Mazo 2: " + tmazo2));
+                divJug.appendChild(document.createElement("br"));
+                divJug.appendChild(document.createTextNode("Clase Mazo 3: " + tmazo3));
+                divJug.appendChild(document.createElement("br"));
+                divJug.appendChild(document.createTextNode("Avatar: "));
+                var avatar = document.createElement("img");
+                avatar.setAttribute("height", 50);
+                avatar.setAttribute("width", 50);
+                avatar.setAttribute("src", reader.result);
+                divJug.appendChild(avatar);
+                if (divRes.firstChild !== null) {
+                    divRes.removeChild(divRes.firstChild);
+                    divRes.appendChild(divJug);
+                } else {
+                    divRes.appendChild(divJug);
+                }
+            }
+
+            if (divMsg.firstChild !== null) {
+                divMsg.removeChild(divMsg.firstChild);
+                divMsg.appendChild(mensaje);
+            } else {
+                divMsg.appendChild(mensaje);
+            }
+        });
+    };
+    reader.onerror = function (error) {
         var divMsg = document.getElementById(idDivMsg);
-        var divRes = document.getElementById(idDivRes);
-        var mensaje = document.createTextNode(res.msg);
         if (divMsg.firstChild !== null) {
             divMsg.removeChild(divMsg.firstChild);
-            divMsg.appendChild(mensaje);
+            divMsg.appendChild("Error al cargar la imagen: " + error);
         } else {
-            divMsg.appendChild(mensaje);
+            divMsg.appendChild("Error al cargar la imagen: " + error);
         }
-        var vacio = document.createTextNode(" ");
-        if (divRes.firstChild !== null) {
-            divRes.removeChild(divRes.firstChild);
-            divRes.appendChild(vacio);
-        } else {
-            divRes.appendChild(vacio);
-        }
-    });
-}
-
-function editarJugador(idJugador, idDivMsg, idDivRes){
-    console.log("FALTA HACER");
+    };
 }
 
 function verGrupos(idDivMsg, idDivRes) {
