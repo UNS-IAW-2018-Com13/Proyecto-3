@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get('/administrador/jugadores', 'AdminController@jugadores')->name('admin_jug')->middleware('auth');
 Route::get('/administrador/verJugadores', 'AdminController@verJugadores')->middleware('auth');
 Route::post('/administrador/crearJugador', 'AdminController@crearJugador')->middleware('auth');
-Route::get('/administrador/eliminarUltimoJugador', 'AdminController@eliminarUltimoJugador')->middleware('auth');
+Route::post('/administrador/editarJugador', 'AdminController@editarJugador')->middleware('auth');
 Route::get('/administrador/eliminarJugadores', 'AdminController@eliminarJugadores')->middleware('auth');
 
 Route::get('/administrador/grupos', 'AdminController@grupos')->name('admin_grup')->middleware('auth');

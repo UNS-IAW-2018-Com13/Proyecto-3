@@ -6,6 +6,7 @@ use App\Jugadores;
 use App\Mazos;
 use App\Grupos;
 use App\Partidos;
+use App\Imagenes;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -35,6 +36,8 @@ class AdminController extends Controller {
                         $m3 = $mazos[$j]->clase;
                     }
                 }
+                $img = Imagenes::where('nombre', '=', $jugadores[$i]->nombre)->get();
+                $jugadores[$i]->avatar = $img[0]->imagen;
                 $jugadores[$i]->mazos = Array($m1, $m2, $m3);
             }
             $res = Array("cod" => "OK", "msg" => "Jugadores existentes:", "jugadores" => $jugadores);
@@ -46,8 +49,25 @@ class AdminController extends Controller {
     }
 
     public function crearJugador(Request $parametros) {
+        $jugadores = Jugadores::all();
+        if (sizeof($jugadores) === 16) {
+            $res = Array("cod" => "FAIL", "msg" => "No puede haber mas de 16 jugadores en el torneo. No se creo el jugador.");
+            return $res;
+        }
+        if (($parametros->nombre === null) || ($parametros->nombre === "")) {
+            $res = Array("cod" => "FAIL", "msg" => "El nombre del jugador no puede ser vacio. No se creo el jugador.");
+            return $res;
+        }
         $jugador = Jugadores::where('nombre', '=', $parametros->nombre)->get();
         if (sizeof($jugador) == 0) {
+            if (($parametros->mazo1 === "Seleccionar...") || ($parametros->mazo2 === "Seleccionar...") || ($parametros->mazo3 === "Seleccionar...")) {
+                $res = Array("cod" => "FAIL", "msg" => "Mazo seleccionado incorrecto. No se creo el jugador.");
+                return $res;
+            }
+            if (($parametros->mazo1 === $parametros->mazo2) || ($parametros->mazo1 === $parametros->mazo3) || ($parametros->mazo2 === $parametros->mazo3)) {
+                $res = Array("cod" => "FAIL", "msg" => "Los mazos del jugador no pueden ser de clases iguales. No se modificaron los datos del jugador.");
+                return $res;
+            }
             $jugador = new Jugadores();
             $jugador->nombre = $parametros->nombre;
             $jugador->puntaje = 0;
@@ -55,24 +75,27 @@ class AdminController extends Controller {
             $jugador->favorito = 0;
             $jugador->mazos = [$parametros->nombre . "1", $parametros->nombre . "2", $parametros->nombre . "3"];
 
-            //$avatar = $parametros->avatar;
+            $avatar = new Imagenes();
+            $avatar->nombre = $parametros->nombre;
+            $avatar->imagen = $parametros->avatar;
+            $avatar->save();
 
             $mazo1 = new Mazos();
             $mazo1->nombre = $parametros->nombre . "1";
             $mazo1->clase = $parametros->mazo1;
-            $mazo1->cartas = [["carta", 1]];
+            $mazo1->cartas = [];
             $mazo1->save();
 
             $mazo2 = new Mazos();
             $mazo2->nombre = $parametros->nombre . "2";
             $mazo2->clase = $parametros->mazo2;
-            $mazo2->cartas = [["carta", 1]];
+            $mazo2->cartas = [];
             $mazo2->save();
 
             $mazo3 = new Mazos();
             $mazo3->nombre = $parametros->nombre . "3";
             $mazo3->clase = $parametros->mazo3;
-            $mazo3->cartas = [["carta", 1]];
+            $mazo3->cartas = [];
             $mazo3->save();
 
             $jugador->save();
@@ -96,32 +119,82 @@ class AdminController extends Controller {
         return $res;
     }
 
-    public function eliminarUltimoJugador() {
-        $idFav = sizeof(Jugadores::all());
-        if ($idFav === 16) {
-            $res = Array("cod" => "FAIL", "msg" => "No se puede eliminar este jugador en este momento.");
+    public function editarJugador(Request $parametros) {
+        if (($parametros->nombre === null) || ($parametros->nombre === "")) {
+            $res = Array("cod" => "FAIL", "msg" => "El nombre del jugador no puede ser vacio. No se edito el jugador.");
             return $res;
         }
+        if (($parametros->mazo1 === "Seleccionar...") || ($parametros->mazo2 === "Seleccionar...") || ($parametros->mazo3 === "Seleccionar...")) {
+            $res = Array("cod" => "FAIL", "msg" => "Mazo seleccionado incorrecto. No se modificaron los datos del jugador.");
+            return $res;
+        }
+        if (($parametros->mazo1 === $parametros->mazo2) || ($parametros->mazo1 === $parametros->mazo3) || ($parametros->mazo2 === $parametros->mazo3)) {
+            $res = Array("cod" => "FAIL", "msg" => "Los mazos del jugador no pueden ser de clases iguales. No se modificaron los datos del jugador.");
+            return $res;
+        }
+        $jugador = Jugadores::where('nombre', '=', $parametros->id)->get();
+        $jugador[0]->nombre = $parametros->nombre;
+        $jugador[0]->puntaje = 0;
+        $jugador[0]->favorito = 0;
+        $jugador[0]->mazos = [$parametros->nombre . "1", $parametros->nombre . "2", $parametros->nombre . "3"];
 
-        $jugador = Jugadores::where('idFavorito', '=', ($idFav - 1))->get();
-        $m1 = Mazos::where('nombre', '=', ($jugador[0]->nombre . "1"))->get();
-        $m2 = Mazos::where('nombre', '=', ($jugador[0]->nombre . "2"))->get();
-        $m3 = Mazos::where('nombre', '=', ($jugador[0]->nombre . "3"))->get();
+        $avatar = Imagenes::where('nombre', '=', $parametros->id)->get();
+        $avatar[0]->nombre = $parametros->nombre;
+        $avatar[0]->imagen = $parametros->avatar;
+        $avatar[0]->save();
 
-        $nombreJ = $jugador[0]->nombre;
+        $mazo1 = Mazos::where('nombre', '=', ($parametros->id . "1"))->get();
+        $mazo1[0]->nombre = $parametros->nombre . "1";
+        $mazo1[0]->clase = $parametros->mazo1;
+        $mazo1[0]->save();
 
-        $jugador[0]->delete();
-        $m1[0]->delete();
-        $m2[0]->delete();
-        $m3[0]->delete();
+        $mazo2 = Mazos::where('nombre', '=', ($parametros->id . "2"))->get();
+        $mazo2[0]->nombre = $parametros->nombre . "2";
+        $mazo2[0]->clase = $parametros->mazo2;
+        $mazo2[0]->save();
 
-        $res = Array("cod" => "OK", "msg" => "El jugador " . $nombreJ . " y sus mazos fueron eliminados correctamente.");
+        $mazo3 = Mazos::where('nombre', '=', ($parametros->id . "3"))->get();
+        $mazo3[0]->nombre = $parametros->nombre . "3";
+        $mazo3[0]->clase = $parametros->mazo3;
+        $mazo3[0]->save();
+
+        $jugador[0]->save();
+
+        /*
+          $cards = explode(chr(13), $_POST['InDeck1']);
+          $mazo = "{'nombre'='{$_POST['InNombre']}1',
+          'clase'= '" . substr($cards[1], 10) . "',
+          'mazos'= [";
+          for ($i = 4; $i < sizeof($cards) - 5; $i++) {
+          $mazo .= "['" . substr($cards[$i], 10) . "', " . substr($cards[$i], 3, 1) . "],";
+          }
+          $mazo = substr($mazo, 0, -1) . "]}";
+          echo $mazo . "<br/>";
+         */
+
+        $res = Array("cod" => "OK", "msg" => "Jugador y mazos editados correctamente.");
         return $res;
     }
 
     public function eliminarJugadores() {
-        $res = Array("cod" => "FAIL", "msg" => "No se pueden eliminar los jugadores en este momento.");
-        return $res;
+        $jugadores = Jugadores::all();
+        if (sizeof($jugadores) > 0) {
+            for ($i = 0; $i < sizeof($jugadores); $i++) {
+                $jugador = $jugadores[$i];
+                $mazo1 = Mazos::where('nombre', '=', ($jugador->nombre . "1"))->get();
+                $mazo2 = Mazos::where('nombre', '=', ($jugador->nombre . "2"))->get();
+                $mazo3 = Mazos::where('nombre', '=', ($jugador->nombre . "3"))->get();
+                $imagen = Imagenes::where('nombre', '=', $jugador->nombre)->get();
+                $imagen[0]->delete();
+                $mazo1[0]->delete();
+                $mazo2[0]->delete();
+                $mazo3[0]->delete();
+                $jugador->delete();
+            }
+            return Array("msg" => "Jugadores, mazos e imagenes asociadas eliminados correctamente.");
+        } else {
+            return Array("msg" => "No hay jugadores para eliminar.");
+        }
     }
 
     public function grupos() {
@@ -147,7 +220,7 @@ class AdminController extends Controller {
         } else {
             $jugadores = Jugadores::all();
             if (sizeof($jugadores) !== 16) {
-                $resultado = Array("cod" => "FJ", "msg" => "Tiene que haber 16 jugadores cargados para poder crear los grupos (ni mas, ni menos).");
+                $resultado = Array("cod" => "FJ", "msg" => "Tiene que haber 16 jugadores cargados para poder crear los grupos.");
                 return $resultado;
             }
             $grupos = Array(new Grupos(), new Grupos(), new Grupos(), new Grupos());
@@ -198,8 +271,7 @@ class AdminController extends Controller {
                 $edit[] = $editores[$i]->name;
             }
             return view('administrador_partidos', ['msg' => "ok", 'editores' => $edit]);
-        }
-        else{
+        } else {
             return view('administrador_partidos', ['msg' => "No hay editores registrados para el torneo. No se podran asignar editores a los partidos.", 'editores' => $edit]);
         }
     }
@@ -280,13 +352,13 @@ class AdminController extends Controller {
     public function asignarEditores(Request $parametros) {
         $partido = Partidos::where('id', '=', $parametros->id)->get();
         if (sizeof($partido) > 0) {
-            if($parametros->fecha === null){
+            if ($parametros->fecha === null) {
                 return Array("cod" => "FAIL", "msg" => "La fecha ingresada no es valida. No se realizaron cambios en el partido.");
             }
-            if($parametros->hora === null){
+            if ($parametros->hora === null) {
                 return Array("cod" => "FAIL", "msg" => "La hora ingresada no es valida. No se realizaron cambios en el partido.");
             }
-            if($parametros->editor === "Seleccionar..."){
+            if ($parametros->editor === "Seleccionar...") {
                 return Array("cod" => "FAIL", "msg" => "El editor seleccionado no es valido. No se realizaron cambios en el partido.");
             }
             $partido[0]->fecha = $parametros->fecha;
