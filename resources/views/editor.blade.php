@@ -57,7 +57,7 @@
                 {{ json_decode($partidos[$i])->rounds[$j]->mazoP }}
             </td>
             @endfor
-            <td id="COM{{ json_decode($partidos[$i])->id }}">
+            <td id="COM{{ json_decode($partidos[$i])->id }}" class="comentario">
                 {{ json_decode($partidos[$i])->comentario }}
             </td>
         </tr>

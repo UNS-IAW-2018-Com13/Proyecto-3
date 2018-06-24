@@ -141,11 +141,9 @@ td {
     border-radius: 50%;
 }
 
-
-/*En las celdas de comentario de partidos para q no se rompa la tabla
-{
-overflow:hidden;
-white-space:nowrap;
-text-overflow: ellipsis;
+.comentario{
+    max-width: 0;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
 }
-*/
