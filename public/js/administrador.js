@@ -127,6 +127,17 @@ function crearJugador(idDivMsg, idDivRes) {
     var tmazo1 = document.getElementById("textMazo1C").value;
     var tmazo2 = document.getElementById("textMazo2C").value;
     var tmazo3 = document.getElementById("textMazo3C").value;
+    
+    if(tavatar === undefined){
+        var divMsg = document.getElementById(idDivMsg);
+        if (divMsg.firstChild !== null) {
+            divMsg.removeChild(divMsg.firstChild);
+            divMsg.appendChild(document.createTextNode("Por favor selecciona una imagen para el avatar del jugador."));
+        } else {
+            divMsg.appendChild(document.createTextNode("Por favor selecciona una imagen para el avatar del jugador."));
+        }
+        return;
+    }
 
     var reader = new FileReader();
     reader.readAsDataURL(tavatar);
@@ -211,6 +222,18 @@ function editarJugador(idJugador, idDivMsg, idDivRes) {
     var tmazo1 = document.getElementById("textMazo1E").value;
     var tmazo2 = document.getElementById("textMazo2E").value;
     var tmazo3 = document.getElementById("textMazo3E").value;
+    
+    if(tavatar === undefined){
+        var divMsg = document.getElementById(idDivMsg);
+        if (divMsg.firstChild !== null) {
+            divMsg.removeChild(divMsg.firstChild);
+            divMsg.appendChild(document.createTextNode("Por favor selecciona una imagen para el avatar del jugador."));
+        } else {
+            divMsg.appendChild(document.createTextNode("Por favor selecciona una imagen para el avatar del jugador."));
+        }
+        return;
+    }
+    
     var reader = new FileReader();
     reader.readAsDataURL(tavatar);
     reader.onload = function () {
