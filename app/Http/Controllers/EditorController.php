@@ -84,8 +84,26 @@ class EditorController extends Controller {
             if ($parRounds[$i]['mazoG'] === "13") {
                 $mgan = $partido[0]->jugador1 . "3";
             }
+            if ($parRounds[$i]['mazoG'] === "21") {
+                $mgan = $partido[0]->jugador2 . "1";
+            }
+            if ($parRounds[$i]['mazoG'] === "22") {
+                $mgan = $partido[0]->jugador2 . "2";
+            }
+            if ($parRounds[$i]['mazoG'] === "23") {
+                $mgan = $partido[0]->jugador2 . "3";
+            }
             if ($parRounds[$i]['mazoG'] === "Seleccionar...") {
                 $mgan = "-";
+            }
+            if ($parRounds[$i]['mazoP'] === "11") {
+                $mper = $partido[0]->jugador1 . "1";
+            }
+            if ($parRounds[$i]['mazoP'] === "12") {
+                $mper = $partido[0]->jugador1 . "2";
+            }
+            if ($parRounds[$i]['mazoP'] === "13") {
+                $mper = $partido[0]->jugador1 . "3";
             }
             if ($parRounds[$i]['mazoP'] === "21") {
                 $mper = $partido[0]->jugador2 . "1";

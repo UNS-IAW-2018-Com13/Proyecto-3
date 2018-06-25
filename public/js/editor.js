@@ -17,9 +17,9 @@ function completarModalEditor(id, j1, j2, mazosJ1, mazosJ2) {
             selMPR.removeChild(selMPR.firstChild);
         }
 
-        var opSel = document.createElement("option");
-        opSel.selected;
-        opSel.appendChild(document.createTextNode("Seleccionar..."));
+        var opSelJ = document.createElement("option");
+        opSelJ.selected;
+        opSelJ.appendChild(document.createTextNode("Seleccionar..."));
 
         var opJ1 = document.createElement("option");
         opJ1.setAttribute("value", "1");
@@ -29,73 +29,73 @@ function completarModalEditor(id, j1, j2, mazosJ1, mazosJ2) {
         opJ2.setAttribute("value", "2");
         opJ2.appendChild(document.createTextNode(j2));
 
-        selGR.appendChild(opSel);
+        selGR.appendChild(opSelJ);
         selGR.appendChild(opJ1);
         selGR.appendChild(opJ2);
 
-        var opSel = document.createElement("option");
-        opSel.selected;
-        opSel.appendChild(document.createTextNode("Seleccionar..."));
+        var opSelMG = document.createElement("option");
+        opSelMG.selected;
+        opSelMG.appendChild(document.createTextNode("Seleccionar..."));
 
-        var opM1J1 = document.createElement("option");
-        opM1J1.setAttribute("value", "11");
-        opM1J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[0]));
-        var opM2J1 = document.createElement("option");
-        opM2J1.setAttribute("value", "12");
-        opM2J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[1]));
-        var opM3J1 = document.createElement("option");
-        opM3J1.setAttribute("value", "13");
-        opM3J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[2]));
+        var opGM1J1 = document.createElement("option");
+        opGM1J1.setAttribute("value", "11");
+        opGM1J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[0]));
+        var opGM2J1 = document.createElement("option");
+        opGM2J1.setAttribute("value", "12");
+        opGM2J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[1]));
+        var opGM3J1 = document.createElement("option");
+        opGM3J1.setAttribute("value", "13");
+        opGM3J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[2]));
 
-        var opM1J2 = document.createElement("option");
-        opM1J2.setAttribute("value", "21");
-        opM1J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[0]));
-        var opM2J2 = document.createElement("option");
-        opM2J2.setAttribute("value", "22");
-        opM2J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[1]));
-        var opM3J2 = document.createElement("option");
-        opM3J2.setAttribute("value", "23");
-        opM3J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[2]));
+        var opGM1J2 = document.createElement("option");
+        opGM1J2.setAttribute("value", "21");
+        opGM1J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[0]));
+        var opGM2J2 = document.createElement("option");
+        opGM2J2.setAttribute("value", "22");
+        opGM2J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[1]));
+        var opGM3J2 = document.createElement("option");
+        opGM3J2.setAttribute("value", "23");
+        opGM3J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[2]));
 
-        selMGR.appendChild(opSel);
-        selMGR.appendChild(opM1J1);
-        selMGR.appendChild(opM2J1);
-        selMGR.appendChild(opM3J1);
-        selMGR.appendChild(opM1J2);
-        selMGR.appendChild(opM2J2);
-        selMGR.appendChild(opM3J2);
+        selMGR.appendChild(opSelMG);
+        selMGR.appendChild(opGM1J1);
+        selMGR.appendChild(opGM2J1);
+        selMGR.appendChild(opGM3J1);
+        selMGR.appendChild(opGM1J2);
+        selMGR.appendChild(opGM2J2);
+        selMGR.appendChild(opGM3J2);
 
-        var opSel = document.createElement("option");
-        opSel.selected;
-        opSel.appendChild(document.createTextNode("Seleccionar..."));
+        var opSelMP = document.createElement("option");
+        opSelMP.selected;
+        opSelMP.appendChild(document.createTextNode("Seleccionar..."));
 
-        var opM1J1 = document.createElement("option");
-        opM1J1.setAttribute("value", "11");
-        opM1J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[0]));
-        var opM2J1 = document.createElement("option");
-        opM2J1.setAttribute("value", "12");
-        opM2J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[1]));
-        var opM3J1 = document.createElement("option");
-        opM3J1.setAttribute("value", "13");
-        opM3J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[2]));
+        var opPM1J1 = document.createElement("option");
+        opPM1J1.setAttribute("value", "11");
+        opPM1J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[0]));
+        var opPM2J1 = document.createElement("option");
+        opPM2J1.setAttribute("value", "12");
+        opPM2J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[1]));
+        var opPM3J1 = document.createElement("option");
+        opPM3J1.setAttribute("value", "13");
+        opPM3J1.appendChild(document.createTextNode(j1 + " " + mazosJ1[2]));
 
-        var opM1J2 = document.createElement("option");
-        opM1J2.setAttribute("value", 21);
-        opM1J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[0]));
-        var opM2J2 = document.createElement("option");
-        opM2J2.setAttribute("value", "22");
-        opM2J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[1]));
-        var opM3J2 = document.createElement("option");
-        opM3J2.setAttribute("value", "23");
-        opM3J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[2]));
+        var opPM1J2 = document.createElement("option");
+        opPM1J2.setAttribute("value", 21);
+        opPM1J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[0]));
+        var opPM2J2 = document.createElement("option");
+        opPM2J2.setAttribute("value", "22");
+        opPM2J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[1]));
+        var opPM3J2 = document.createElement("option");
+        opPM3J2.setAttribute("value", "23");
+        opPM3J2.appendChild(document.createTextNode(j2 + " " + mazosJ2[2]));
 
-        selMPR.appendChild(opSel);
-        selMPR.appendChild(opM1J1);
-        selMPR.appendChild(opM2J1);
-        selMPR.appendChild(opM3J1);
-        selMPR.appendChild(opM1J2);
-        selMPR.appendChild(opM2J2);
-        selMPR.appendChild(opM3J2);
+        selMPR.appendChild(opSelMP);
+        selMPR.appendChild(opPM1J1);
+        selMPR.appendChild(opPM2J1);
+        selMPR.appendChild(opPM3J1);
+        selMPR.appendChild(opPM1J2);
+        selMPR.appendChild(opPM2J2);
+        selMPR.appendChild(opPM3J2);
     }
     var boton = document.getElementById("botonModal");
     boton.setAttribute("onclick", "actualizarTablaPartidosEditor('" + id + "')");
